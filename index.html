@@ -119,7 +119,60 @@
 </head>
 <body>
 
-  <!-- ... todo igual hasta la sección de sucursales ... -->
+  <header>
+    <div class="logo">
+      <img src="https://images.squarespace-cdn.com/content/v1/55a402bfe4b057684b0f0556/1441902414687-SDML24VOXIQ3FV6BFS4K/Untitled-1.png" alt="Sushi Time">
+    </div>
+    <nav>
+      <ul class="desktop-menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#menu">CLÁSICOS</a></li>
+        <li><a href="#sucursales">Sucursales</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="#inicio" onclick="toggleMenu()">Inicio</a>
+    <a href="#menu" onclick="toggleMenu()">CLÁSICOS</a>
+    <a href="#sucursales" onclick="toggleMenu()">Sucursales</a>
+    <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+  </div>
+
+  <section class="hero" id="inicio">
+    <h1>SUSHI TIME</h1>
+    <p>Uruguay</p>
+    <div class="order-row">
+      <a href="https://www.surbit.uy/DelysoftApp/SushiTime" target="_blank" class="btn">PEDIR POCITOS</a>
+      <a href="https://www.surbit.uy/DelysoftApp/SushiTimeCarrasco" target="_blank" class="btn">PEDIR CARRASCO</a>
+      <a href="https://www.surbit.uy/DelysoftApp/SushiTimeLagomar" target="_blank" class="btn">PEDIR LAGOMAR</a>
+    </div>
+  </section>
+
+  <section class="menu-preview" id="menu" data-aos="fade-up">
+    <h2>Nuestros Clásicos</h2>
+    <div class="menu-grid">
+      <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://pedidosya.dhmedia.io/image/pedidosya/products/0b65d989-2bd0-4e14-9300-b028ff6fef3a.jpeg?quality=90&width=1152&webp=1" alt="Combinado Premium">
+        <h3>Combinado Premium</h3>
+        <p>$890</p>
+      </div>
+      <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
+        <img src="https://pedidosya.dhmedia.io/image/pedidosya/products/df16e006-9de4-41a6-ae99-7bab51bcc48c.jpeg?quality=90&width=1152&webp=1" alt="Combinado Clásico">
+        <h3>Combinado Clásico</h3>
+        <p>$950</p>
+      </div>
+      <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
+        <img src="https://images.squarespace-cdn.com/content/v1/55a402bfe4b057684b0f0556/1663253458674-DTRYZ3I4A3V424W2DBMC/sushi+time+4+.jpg" alt="Hot Rolls">
+        <h3>Hot Rolls</h3>
+        <p>$2.890</p>
+      </div>
+    </div>
+  </section>
 
   <section class="sucursales" id="sucursales">
     <h2 data-aos="fade-up">Sucursales</h2>
@@ -138,25 +191,26 @@
         <a href="https://www.surbit.uy/DelysoftApp/SushiTimeCarrasco" target="_blank" class="btn" style="margin-top:25px;">Pedir Online</a>
       </div>
       
-      <!-- ★ LAGOMAR – OPCIÓN 2 (elegante y sutil) ★ -->
-      <div class="card" data-aos="fade-up" data-aos-delay="300" style="position:relative; overflow:hidden;">
-        <!-- Cinta roja diagonal clásica -->
-        <div style="position:absolute; top:14px; right:-48px; background:var(--red); color:white; padding:9px 56px; font-weight:800; font-size:1.25rem; transform:rotate(45deg); box-shadow:0 4px 15px rgba(230,57,70,0.5); z-index:10;">
+      <!-- ★ LAGOMAR CON 20% OFF – VERSIÓN POTENTE ★ -->
+      <div class="card" data-aos="fade-up" data-aos-delay="300" style="position:relative; overflow:hidden; border: 3px solid var(--gold); background: rgba(212, 175, 55, 0.1);">
+        <!-- Cinta roja diagonal -->
+        <div style="position:absolute; top:15px; right:-45px; background:var(--red); color:white; padding:10px 55px; font-weight:800; font-size:1.3rem; transform:rotate(45deg); box-shadow:0 4px 20px rgba(230,57,70,0.6); z-index:10; letter-spacing:1px;">
           20% OFF
         </div>
         
         <h3>Lagomar</h3>
-        <p style="color:var(--gold); font-weight:700; font-size:1.35rem; margin:18px 0 20px;">
-          ¡20% de descuento en todos los pedidos!
+        <p style="font-size:1.9rem; color:var(--gold); font-weight:700; margin:20px 0 15px; line-height:1.2;">
+          ¡20% de descuento en toda la carta!
         </p>
         <p>Acera norte, Av Giannattasio km 22000<br>15000 Departamento de Canelones</p>
         <p>Tel: 2698 9000</p>
-        <a href="https://www.surbit.uy/DelysoftApp/SushiTimeLagomar" target="_blank" class="btn" style="margin-top:25px;">Pedir Online</a>
+        <a href="https://www.surbit.uy/DelysoftApp/SushiTimeLagomar" target="_blank" class="btn" style="margin-top:25px; background:var(--gold); color:#000; font-weight:800;">
+          Pedir Online con 20% OFF
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- El resto del código es idéntico al anterior -->
   <section class="social-map">
     <div class="instagram" data-aos="fade-up">
       <h3>Síguenos @sushitimeuy</h3>
@@ -179,6 +233,7 @@
     </div>
   </section>
 
+  <!-- WhatsApp flotante -->
   <div class="whatsapp-fixed">
     <div class="whatsapp-text">WhatsApp Pedidos</div>
     <a href="https://wa.me/59897123456?text=%C2%A1Hola!%20Quiero%20hacer%20un%20pedido" target="_blank" class="whatsapp-btn">
