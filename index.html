@@ -2,7 +2,6 @@
 <html lang="es-UY">
 <head>
   <meta charset="UTF-8">
-  <!-- ESTA LÍNEA ARREGLA EL ZOOM EN CELULAR (es la clave) -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Sushi Time • Montevideo</title>
   <meta name="description" content="El mejor sushi japonés de Montevideo. Pocitos • Carrasco • Lagomar. Pedí online ahora.">
@@ -31,7 +30,7 @@
     nav ul{display:flex;gap:40px;list-style:none;}
     nav a{color:var(--text);text-decoration:none;font-weight:500;font-size:14px;text-transform:uppercase;letter-spacing:1.8px;transition:.3s;}
     nav a:hover{color:var(--red);}
-    .hamburger{display:none;cursor: pointer;z-index:1001;}
+    .hamburger{display:none;cursor:pointer;z-index:1001;}
     .hamburger div{width:28px;height:3px;background:white;margin:6px;transition:.4s;}
     .nav-mobile{
       position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--bg);
@@ -95,29 +94,13 @@
     footer{background:#000;padding:100px 20px;text-align:center;color:#666;font-size:0.9rem;}
     footer a{color:var(--red);text-decoration:none;}
 
-    /* WhatsApp flotante con texto verde oficial */
-    .whatsapp-fixed{
-      position:fixed;bottom:20px;right:20px;z-index:999;
-      display:flex;flex-direction:column;align-items:center;gap:10px;
-    }
-    .whatsapp-text{
-      background:var(--wa-green);color:white;font-weight:700;
-      font-size:14px;padding:10px 20px;border-radius:30px;
-      box-shadow:0 6px 20px rgba(37,211,102,0.4);
-      animation:floatText 3s ease-in-out infinite;
-      text-transform:uppercase;letter-spacing:1px;white-space:nowrap;
-    }
-    .whatsapp-btn{
-      background:var(--wa-green);width:66px;height:66px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 8px 30px rgba(37,211,102,0.5);
-      animation:pulse 2s infinite;transition:all .3s;
-    }
+    .whatsapp-fixed{position:fixed;bottom:20px;right:20px;z-index:999;display:flex;flex-direction:column;align-items:center;gap:10px;}
+    .whatsapp-text{background:var(--wa-green);color:white;font-weight:700;font-size:14px;padding:10px 20px;border-radius:30px;box-shadow:0 6px 20px rgba(37,211,102,0.4);animation:floatText 3s ease-in-out infinite;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+    .whatsapp-btn{background:var(--wa-green);width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(37,211,102,0.5);animation:pulse 2s infinite;transition:all .3s;}
     .whatsapp-btn:hover{transform:scale(1.15);box-shadow:0 12px 40px rgba(37,211,102,0.7);}
     @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.6);}70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
     @keyframes floatText{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 
-    /* RESPONSIVE - Celular perfecto */
     @media (max-width:900px){
       .social-map{grid-template-columns:1fr !important;}
       .social-map > .instagram{order:2;}
@@ -127,22 +110,11 @@
       .whatsapp-btn{width:74px;height:74px;}
       .whatsapp-btn svg{width:44px;height:44px;}
       .whatsapp-text{font-size:15px;padding:12px 22px;}
-      .hero h1{font-size:19vw;}
-      .hero p{font-size:1.6rem;}
-      .menu-preview h2,.sucursales h2{font-size:4.5rem !important;}
-      .card{padding:45px 25px;}
-      .card h3{font-size:2.8rem;}
-      .location-tab{padding:16px 36px;font-size:1.3rem;}
-    }
-    @media (max-width:480px){
-      .whatsapp-btn{width:70px;height:70px;}
-      .whatsapp-text{font-size:14px;padding:10px 18px;}
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <div class="logo">
       <img src="https://images.squarespace-cdn.com/content/v1/55a402bfe4b057684b0f0556/1441902414687-SDML24VOXIQ3FV6BFS4K/Untitled-1.png" alt="Sushi Time">
@@ -177,22 +149,24 @@
     </div>
   </section>
 
+  <!-- Clásicos - FOTO REAL DEL COMBINADO CLÁSICO -->
   <section class="menu-preview" id="menu" data-aos="fade-up">
     <h2>Nuestros Clásicos</h2>
     <div class="menu-grid">
       <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
-        <img src="https://images.squarespace-cdn.com/content/v1/55a402bfe4b057684b0f0556/1663253457669-7NSGXIJO3J3O8J3MKGBT/sushi+time+2+.jpg" alt="Philadelphia Roll">
-        <h3>Philadelphia Roll</h3>
+        <img src="https://images.squarespace-cdn.com/content/v1/55a402bfe4b057684b0f0556/1663253457669-7NSGXIJO3J3O8J3MKGBT/sushi+time+2+.jpg" alt="NewYork Phila">
+        <h3>NewYork Phila</h3>
         <p>$890</p>
       </div>
       <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
-        <img src="https://images.squarespace-cdn.com/content/v1/55a402bfe4b057684b0f0556/1663253457168-37YXW3WBG3GK2388HXXS/sushi+time+3+.jpg" alt="Hot Roll Camarón">
-        <h3>Hot Roll Camarón</h3>
+        <!-- FOTO REAL que me pasaste -->
+        <img src="https://pedidosya.dhmedia.io/image/pedidosya/products/df16e006-9de4-41a6-ae99-7bab51bcc48c.jpeg?quality=90&width=1152&webp=1" alt="Combinado Clásico">
+        <h3>Combinado Clásico</h3>
         <p>$950</p>
       </div>
       <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
-        <img src="https://images.squarespace-cdn.com/content/v1/55a402bfe4b057684b0f0556/1663253458674-DTRYZ3I4A3V424W2DBMC/sushi+time+4+.jpg" alt="Combinado 40 piezas">
-        <h3>Combinado 40 piezas</h3>
+        <img src="https://images.squarespace-cdn.com/content/v1/55a402bfe4b057684b0f0556/1663253458674-DTRYZ3I4A3V424W2DBMC/sushi+time+4+.jpg" alt="Hot Rolls">
+        <h3>Hot Rolls</h3>
         <p>$2.890</p>
       </div>
     </div>
@@ -244,7 +218,6 @@
     </div>
   </section>
 
-  <!-- WhatsApp flotante verde con texto arriba -->
   <div class="whatsapp-fixed">
     <div class="whatsapp-text">WhatsApp Pedidos</div>
     <a href="https://wa.me/59897123456?text=%C2%A1Hola!%20Quiero%20hacer%20un%20pedido" target="_blank" class="whatsapp-btn">
@@ -262,22 +235,18 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({duration: 1200, once: true});
-
     window.addEventListener('scroll', () => {
       document.querySelector('header').classList.toggle('scrolled', window.scrollY > 100);
     });
-
     function toggleMenu() {
       document.getElementById('navMobile').classList.toggle('active');
       document.querySelector('.hamburger').classList.toggle('active');
     }
-
     function cambiarMapa(sucursal) {
       const iframe = document.getElementById('mapaIframe');
       const tabs = document.querySelectorAll('.location-tab');
       tabs.forEach(tab => tab.classList.remove('active'));
       event.target.classList.add('active');
-
       const mapas = {
         pocitos: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.879365288849!2d-56.14967282474992!3d-34.90424877289362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959f81a8f8b8b8b9%3A0x9c8b8e8f8b8b8b8c!2sRoque+Graseras+885%2C+11300+Montevideo%2C+Uruguay!5e0!3m2!1ses!2suy",
         carrasco: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3276.234567890123!2d-56.04652368488739!3d-34.89123498038338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959f81f8e8d8d8d9%3A0x8d9e8f9g0h1i2j3k!2sAv.+Bolivia+2128%2C+11500+Montevideo%2C+Uruguay!5e0!3m2!1ses!2suy",
