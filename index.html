@@ -7,136 +7,107 @@
 
   <style>
     :root {
-      --bg: #0a0a0a;
-      --panel: #111111;
-      --panel-soft: #161616;
-      --text: #f5f5f7;
-      --muted: #9b9b9f;
-      --accent: #ff2d2d;
-      --border: #1f1f1f;
-      --radius: 18px;
+      --bg:#0a0a0a;
+      --panel:#111111;
+      --panel-soft:#161616;
+      --text:#f5f5f7;
+      --muted:#9b9b9f;
+      --accent:#ff2d2d;
+      --border:#1f1f1f;
+      --radius:18px;
     }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #000 0%, var(--bg) 100%);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      background:linear-gradient(180deg,#000 0%,var(--bg) 100%);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
     }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(10,10,10,0.7);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(10,10,10,.7);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
     }
-
-    .header-inner {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
+    .header-inner{
+      max-width:1600px;margin:0 auto;
+      padding:14px 20px;
+      display:flex;align-items:center;gap:20px;
     }
-
-    .logo { font-size: 20px; font-weight: 600; }
-    .logo span { color: var(--accent); }
-
-    .tabs { margin-left: auto; display:flex; gap:10px; }
-
-    .tab {
-      padding: 8px 18px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
+    .logo{font-size:20px;font-weight:600}
+    .logo span{color:var(--accent)}
+    .tabs{margin-left:auto;display:flex;gap:10px}
+    .tab{
+      padding:8px 18px;border-radius:999px;
+      border:1px solid var(--border);
+      background:transparent;color:var(--muted);
+      cursor:pointer;
     }
-
-    .tab.active { background: var(--accent); color:#fff; border-color:transparent; }
-
-    main {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 28px 20px 40px;
-      display: grid;
-      grid-template-columns: 1fr 400px;
-      gap: 28px;
+    .tab.active{background:var(--accent);color:#fff;border-color:transparent}
+    main{
+      max-width:1600px;margin:0 auto;
+      padding:28px 20px 40px;
+      display:grid;grid-template-columns:1fr 400px;gap:28px;
     }
-
-    .player-card, .chat-card {
-      background: var(--panel);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,.5);
+    .player-card,.chat-card{
+      background:var(--panel);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:0 30px 80px rgba(0,0,0,.5);
     }
-
-    .player-top, .chat-top {
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--border);
-      font-size: 14px;
+    .player-top,.chat-top{
+      padding:14px 18px;
+      border-bottom:1px solid var(--border);
+      font-size:14px;
     }
-
-    .player-wrap { aspect-ratio: 16/9; background:#000; }
-    iframe { width:100%; height:100%; border:0; }
-
-    .chat-card { display:flex; flex-direction:column; }
-
-    .chat-messages {
-      flex:1;
-      padding:12px;
-      overflow-y:auto;
-      font-size:13px;
-      word-wrap: break-word;
-      overflow-wrap: anywhere;
+    .player-wrap{aspect-ratio:16/9;background:#000}
+    iframe{width:100%;height:100%;border:0}
+    .chat-card{display:flex;flex-direction:column}
+    .chat-messages{
+      flex:1;padding:12px;overflow-y:auto;
+      font-size:13px;overflow-wrap:anywhere;
     }
-
-    .msg { margin-bottom:8px; }
-    .msg strong { color: var(--accent); }
-
-    .chat-input {
-      display:flex;
-      gap:8px;
-      padding:10px;
+    .msg{margin-bottom:8px}
+    .chat-input{
+      display:flex;gap:8px;padding:10px;
       border-top:1px solid var(--border);
       align-items:center;
     }
-
-    .chat-input input {
-      background: var(--panel-soft);
+    .chat-input input{
+      background:var(--panel-soft);
       border:1px solid var(--border);
       border-radius:999px;
       padding:8px 12px;
       color:var(--text);
       font-size:13px;
-      outline:none;
-      flex:1;
-      min-width:0;
+      outline:none;flex:1;
     }
-
-    .chat-input input#nick { width:80px; }
-
-    .chat-input button {
-      padding:8px 14px;
-      border-radius:999px;
-      border:none;
-      background:var(--accent);
-      color:#fff;
+    #nick{width:90px;opacity:.7;cursor:not-allowed}
+    .chat-input button{
+      padding:8px 14px;border-radius:999px;
+      border:none;background:var(--accent);
+      color:#fff;cursor:pointer;
+    }
+    .auth-buttons{
+      display:flex;gap:8px;padding:10px;
+      border-top:1px solid var(--border);
+      flex-wrap:wrap;
+    }
+    .auth-buttons button, .auth-buttons input[type=color]{
+      flex:1;background:transparent;
+      border:1px solid var(--border);
+      color:var(--muted);
+      border-radius:999px;padding:6px;
       cursor:pointer;
-      white-space:nowrap;
     }
-
-    @media (max-width:1100px){
-      main{grid-template-columns:1fr;}
+    .auth-buttons input[type=color]{
+      padding:0; border:none; height:32px;
     }
+    @media(max-width:1100px){main{grid-template-columns:1fr}}
   </style>
 </head>
+
 <body>
 
 <header>
@@ -161,114 +132,166 @@
   <aside class="chat-card">
     <div class="chat-top"><strong>Chat en vivo</strong></div>
     <div class="chat-messages" id="messages"></div>
+
     <div class="chat-input">
-      <input id="nick" placeholder="Nick" maxlength="16">
+      <input id="nick" disabled>
       <input id="text" placeholder="Mensaje…">
-      <button type="button" onclick="toggleEmoji()">😀</button>
-      <button type="button" onclick="sendMsg()">Enviar</button>
+      <button onclick="sendMsg()">Enviar</button>
     </div>
-    <div id="emojis" style="display:none; padding:8px; border-top:1px solid var(--border)"></div>
+
+    <div class="auth-buttons">
+      <button id="btn-register" onclick="register()">Registrarse</button>
+      <button id="btn-login" onclick="login()">Login</button>
+      <button id="btn-logout" onclick="logout()" style="display:none">Logout</button>
+      <button id="btn-edit-color" onclick="showColorPicker()" style="display:none">Editar</button>
+      <input type="color" id="color-picker" style="display:none">
+    </div>
   </aside>
 </main>
 
 <script type="module">
   /* STREAMS */
-  const streams = {
-    daddy: "aHR0cHM6Ly9kYWRkeWhkLmNvbS93YXRjaC9zdHJlYW0tNTM3LnBocA==",
-    espn:  "aHR0cHM6Ly9kYWRkeWhkLmNvbS9zdHJlYW0vc3RyZWFtLTE0OS5waHA=",
-    fox:   "aHR0cHM6Ly9kYWRkeWhkLmNvbS9zdHJlYW0vc3RyZWFtLTc4Ny5waHA="
+  const streams={
+    daddy:"aHR0cHM6Ly9kYWRkeWhkLmNvbS93YXRjaC9zdHJlYW0tNTM3LnBocA==",
+    espn:"aHR0cHM6Ly9kYWRkeWhkLmNvbS9zdHJlYW0vc3RyZWFtLTE0OS5waHA=",
+    fox:"aHR0cHM6Ly9kYWRkeWhkLmNvbS9zdHJlYW0vc3RyZWFtLTc4Ny5waHA="
   };
-
-  const player = document.getElementById('player');
-
-  window.cambiarStream = function(tipo) {
-    player.src = atob(streams[tipo]);
-    ['daddy','espn','fox'].forEach(k =>
-      document.getElementById('btn-'+k).classList.toggle('active', k===tipo)
-    );
+  const player=document.getElementById('player');
+  window.cambiarStream=t=>{
+    player.src=atob(streams[t]);
+    ['daddy','espn','fox'].forEach(k=>{
+      document.getElementById('btn-'+k).classList.toggle('active',k===t);
+    });
   };
-  window.onload = () => cambiarStream('daddy');
+  cambiarStream('daddy');
 
   /* FIREBASE */
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getDatabase, ref, push, onChildAdded, set, get }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
   import {
-    getDatabase, ref, push,
-    onChildAdded, set, onDisconnect
-  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDSxZILNH92QqkfnQeSpYZeboqylAo_6S0",
-    authDomain: "sushitime-b84fc.firebaseapp.com",
-    databaseURL: "https://sushitime-b84fc-default-rtdb.firebaseio.com",
-    projectId: "sushitime-b84fc",
-    storageBucket: "sushitime-b84fc.firebasestorage.app",
-    messagingSenderId: "821112951317",
-    appId: "1:821112951317:web:5d64d505d35d4f67aab41c"
-  };
+  const app=initializeApp({
+    apiKey:"AIzaSyDSxZILNH92QqkfnQeSpYZeboqylAo_6S0",
+    authDomain:"sushitime-b84fc.firebaseapp.com",
+    databaseURL:"https://sushitime-b84fc-default-rtdb.firebaseio.com",
+    projectId:"sushitime-b84fc"
+  });
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+  const db=getDatabase(app);
+  const auth=getAuth(app);
 
-  const messagesRef = ref(db, 'chat/messages');
+  signOut(auth);
 
-  const box = document.getElementById('messages');
-  const nickInput = document.getElementById('nick');
-  const textInput = document.getElementById('text');
+  const messagesRef=ref(db,'chat/messages');
+  const box=document.getElementById('messages');
+  const nickInput=document.getElementById('nick');
+  const textInput=document.getElementById('text');
 
-  nickInput.value = localStorage.getItem('nick') || '';
+  const btnLogin=document.getElementById('btn-login');
+  const btnRegister=document.getElementById('btn-register');
+  const btnLogout=document.getElementById('btn-logout');
+  const btnEditColor=document.getElementById('btn-edit-color');
+  const colorPicker=document.getElementById('color-picker');
 
-  function stringToColor(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  const guestNick='Guest'+Math.random().toString(36).substring(2,6).toUpperCase();
+  let currentNick=guestNick;
+  let currentColor="#ffffff";
+  nickInput.value=guestNick;
+
+  onAuthStateChanged(auth, async user=>{
+    if(user){
+      const snap=await get(ref(db,'users/'+user.uid+'/nick'));
+      currentNick=snap.val();
+
+      const colorSnap = await get(ref(db,'users/'+user.uid+'/color'));
+      currentColor = colorSnap.val() || "#ffffff";
+
+      nickInput.value=currentNick;
+
+      btnLogin.style.display='none';
+      btnRegister.style.display='none';
+      btnLogout.style.display='block';
+      btnEditColor.style.display='block';
+    }else{
+      currentNick=guestNick;
+      currentColor="#ffffff";
+      nickInput.value=guestNick;
+
+      btnLogin.style.display='block';
+      btnRegister.style.display='block';
+      btnLogout.style.display='none';
+      btnEditColor.style.display='none';
+      colorPicker.style.display='none';
     }
-    return `hsl(${hash % 360}, 70%, 60%)`;
-  }
+  });
 
-  onChildAdded(messagesRef, snap => {
-    const m = snap.val();
-    const div = document.createElement('div');
-    const color = stringToColor(m.nick);
-    div.innerHTML = `<span style="color:${color};font-weight:600">${m.nick}</span>: ${m.text}`;
+  onChildAdded(messagesRef,snap=>{
+    const m=snap.val();
+    const badge = m.verified ? ' <span style="color:#2ecc71">✔️</span>' : '';
+    const nickColor = m.color || "#ffffff";
+    const div=document.createElement('div');
+    div.className='msg';
+    div.innerHTML=`<strong style="color:${nickColor}">${m.nick}${badge}</strong>: ${m.text}`;
     box.appendChild(div);
-    box.scrollTop = box.scrollHeight;
+    box.scrollTop=box.scrollHeight;
   });
 
-  window.sendMsg = function () {
-    const nick = nickInput.value.trim();
-    const text = textInput.value.trim();
-    if (!nick || !text) return;
-    localStorage.setItem('nick', nick);
-    push(messagesRef, { nick, text, time: Date.now() });
-    textInput.value = '';
+  window.sendMsg=()=>{
+    if(!textInput.value.trim())return;
+    push(messagesRef,{
+      nick:currentNick,
+      text:textInput.value,
+      verified: !!auth.currentUser,
+      color: currentColor,
+      time:Date.now()
+    });
+    textInput.value='';
   };
 
-  /* 👇 FIX CLAVE */
-  window.toggleEmoji = function () {
-    const e = document.getElementById('emojis');
-    e.style.display = (e.style.display === 'none' || !e.style.display)
-      ? 'flex'
-      : 'none';
+  window.register=async()=>{
+    const nick=prompt('Nick');
+    const pass=prompt('Contraseña (mínimo 6)');
+    if(!nick||!pass)return;
+    const email=`${nick}@chat.f1ya.com`;
+    const { user }=await createUserWithEmailAndPassword(auth,email,pass);
+    await set(ref(db,'users/'+user.uid),{nick,color:"#ffffff"});
   };
 
-  const emojiList=['😀','😂','😍','😎','😭','🔥','👏','🤯','🏎️','🚥','🏁','⚡'];
-  const emojiBox=document.getElementById('emojis');
-  emojiBox.style.flexWrap='wrap';
-  emojiBox.style.gap='6px';
+  window.login=async()=>{
+    const nick=prompt('Nick');
+    const pass=prompt('Contraseña');
+    if(!nick||!pass)return;
+    const email=`${nick}@chat.f1ya.com`;
+    await signInWithEmailAndPassword(auth,email,pass);
+  };
 
-  emojiList.forEach(em=>{
-    const b=document.createElement('button');
-    b.textContent=em;
-    b.style.fontSize='18px';
-    b.style.background='transparent';
-    b.style.border='none';
-    b.style.cursor='pointer';
-    b.onclick=()=>{ textInput.value+=em; textInput.focus(); };
-    emojiBox.appendChild(b);
+  window.logout=async()=>{
+    await signOut(auth);
+  };
+
+  window.showColorPicker=()=>{
+    colorPicker.value=currentColor;
+    colorPicker.click();
+  };
+
+  colorPicker.addEventListener('input', async (e)=>{
+    currentColor=e.target.value;
+    const user = auth.currentUser;
+    if(user){
+      await set(ref(db,'users/'+user.uid+'/color'), currentColor);
+    }
   });
 
+  // ENTER key para enviar mensaje
   textInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') sendMsg();
+    if(e.key === 'Enter') sendMsg();
   });
 </script>
 
