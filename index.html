@@ -34,8 +34,9 @@
   .chat-input input{background:var(--panel-soft);border:1px solid var(--border);border-radius:999px;padding:8px 12px;color:var(--text);font-size:13px;outline:none;flex:1;}
   #nick{width:90px;opacity:.7;cursor:not-allowed}
   .chat-input button{padding:8px 14px;border-radius:999px;border:none;background:var(--accent);color:#fff;cursor:pointer;}
-  .auth-buttons{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border);}
+  .auth-buttons{display:flex;flex-direction:column;gap:8px;padding:10px;border-top:1px solid var(--border);}
   .auth-buttons button{flex:1;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:999px;padding:6px;cursor:pointer;}
+  .auth-text{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.3;}
   @media(max-width:1100px){main{grid-template-columns:1fr}}
   .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:100;}
   .modal-content{background:var(--panel);padding:20px;border-radius:var(--radius);width:300px;display:flex;flex-direction:column;gap:12px;}
@@ -45,6 +46,7 @@
   #colorModalContent,#bgModalContent{background:var(--panel);padding:20px;border-radius:var(--radius);display:flex;flex-direction:column;gap:12px;}
   .color-input,.bg-input{width:100%;height:40px;border:none;border-radius:8px;cursor:pointer;}
   .preview-box{padding:6px;border-radius:6px;text-align:center;font-weight:bold;margin-top:6px;}
+  #registeredUsersContainer{margin-top:16px;padding:10px;background:var(--panel-soft);border-radius:var(--radius);overflow-x:auto;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -65,6 +67,12 @@
     <div class="player-top"><strong>Fórmula 1 · Live</strong></div>
     <div class="player-wrap">
       <iframe id="player" src="about:blank" allowfullscreen></iframe>
+    </div>
+
+    <!-- Lista de usuarios registrados debajo del reproductor -->
+    <div id="registeredUsersContainer">
+      <strong>Usuarios Registrados:</strong>
+      <span id="registeredUsers"></span>
     </div>
   </section>
 
@@ -123,7 +131,7 @@
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, push, onChildAdded, set, get, query, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, push, onChildAdded, set, get, onValue, query, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 /* STREAMS */
@@ -145,7 +153,9 @@ const auth=getAuth(app);
 
 /* CHAT */
 const messagesRef=ref(db,'chat/messages');
+const usersRef=ref(db,'users');
 const box=document.getElementById('messages');
+const registeredUsersSpan=document.getElementById('registeredUsers');
 const nickInput=document.getElementById('nick');
 const textInput=document.getElementById('text');
 let guestNick='Guest'+Math.random().toString(36).substring(2,6).toUpperCase();
@@ -190,7 +200,7 @@ onAuthStateChanged(auth, async user=>{
   }
 });
 
-/* Últimos 40 mensajes */
+/* Mostrar últimos 40 mensajes */
 const messagesQuery=query(messagesRef, limitToLast(40));
 onChildAdded(messagesQuery,snap=>{
   const m=snap.val();
@@ -230,7 +240,7 @@ async function register(){
   if(!nick||!pass)return alert('Completa todos los campos');
   const email=`${nick}@chat.f1ya.com`;
   const {user}=await createUserWithEmailAndPassword(auth,email,pass);
-  await set(ref(db,'users/'+user.uid),{nick,color:'#ffffff',bg:'transparent'});
+  await set(ref(db,'users/'+user.uid),{nick,color:'#ffffff',bg:'transparent',online:true});
   closeModal();
 }
 async function login(){
@@ -239,9 +249,13 @@ async function login(){
   if(!nick||!pass)return alert('Completa todos los campos');
   const email=`${nick}@chat.f1ya.com`;
   await signInWithEmailAndPassword(auth,email,pass);
+  await set(ref(db,'users/'+auth.currentUser.uid+'/online'),true);
   closeModal();
 }
-window.logout=()=>signOut(auth);
+window.logout=async ()=>{
+  if(auth.currentUser) await set(ref(db,'users/'+auth.currentUser.uid+'/online'),false);
+  signOut(auth);
+}
 
 /* COLOR NICK */
 window.updatePreview=()=>{
@@ -269,6 +283,19 @@ window.saveBgColor=()=>{
   if(auth.currentUser) set(ref(db,'users/'+auth.currentUser.uid+'/bg'),bg);
   closeBgModal();
 }
+
+/* LISTA DE USUARIOS REGISTRADOS DEBAJO DEL REPRODUCTOR */
+function updateRegisteredUsers(snapshot){
+  const data=snapshot.val()||{};
+  const usersArr=[];
+  Object.values(data).forEach(u=>{
+    const verified=u.online?' ✅':'';
+    const color=u.color||'#ffffff';
+    usersArr.push(`<span style="color:${color}">${u.nick}${verified}</span>`);
+  });
+  registeredUsersSpan.innerHTML=usersArr.join(', ');
+}
+onValue(usersRef,updateRegisteredUsers);
 </script>
 
 </body>
