@@ -1,259 +1,276 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1Ya - 2026</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-        .header {
-            background-color: #111;
-            padding: 10px;
-            text-align: center;
-            border-bottom: 2px solid #333;
-        }
-        .header button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            background: #333;
-            color: #0ff;
-            border: 1px solid #0ff;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .header button:hover, .header button.active {
-            background: #0ff;
-            color: #000;
-        }
-        .container {
-            display: flex;
-            flex-direction: row;
-            height: calc(100% - 60px);
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-        .stream, .chat-section {
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .stream {
-            flex: 7;
-        }
-        .chat-section {
-            flex: 3;
-            border-left: 2px solid #333;
-            justify-content: flex-start;
-        }
-        .player-container {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-        }
-        .chat-container {
-            width: 100%;
-            height: 100%;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .chat-section h2 {
-            margin: 0 0 10px 0;
-            text-align: center;
-            width: 100%;
-        }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: 0;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-        #chat-iframe {
-            flex: 1;
-            width: 100%;
-            min-height: 600px;
-            border: 0;
-            overflow: hidden;
-        }
-        .controls {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-        }
-        button.controls-btn {
-            padding: 10px 15px;
-            background: #333;
-            color: #0ff;
-            border: 1px solid #0ff;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button.controls-btn:hover {
-            background: #0ff;
-            color: #000;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>F1Ya · Apple Style</title>
 
-        @media (max-width: 900px) {
-            .container {
-                flex-direction: column;
-            }
-            .chat-section {
-                border-left: 0;
-                border-top: 2px solid #333;
-            }
-            .header button {
-                margin: 5px;
-                padding: 8px 15px;
-                font-size: 14px;
-            }
-            iframe {
-                height: 400px;
-            }
-        }
-    </style>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --panel: #111111;
+      --panel-soft: #161616;
+      --text: #f5f5f7;
+      --muted: #9b9b9f;
+      --accent: #ff2d2d;
+      --border: #1f1f1f;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #000 0%, var(--bg) 100%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10,10,10,0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo { font-size: 20px; font-weight: 600; }
+    .logo span { color: var(--accent); }
+
+    .tabs { margin-left: auto; display:flex; gap:10px; }
+
+    .tab {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .tab.active { background: var(--accent); color:#fff; border-color:transparent; }
+
+    main {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 28px;
+    }
+
+    .player-card, .chat-card {
+      background: var(--panel);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.5);
+    }
+
+    .player-top, .chat-top {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .player-wrap { aspect-ratio: 16/9; background:#000; }
+    iframe { width:100%; height:100%; border:0; }
+
+    .chat-card { display:flex; flex-direction:column; }
+
+    .chat-messages {
+      flex:1;
+      padding:12px;
+      overflow-y:auto;
+      font-size:13px;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .msg { margin-bottom:8px; }
+    .msg strong { color: var(--accent); }
+
+    .chat-input {
+      display:flex;
+      gap:8px;
+      padding:10px;
+      border-top:1px solid var(--border);
+      align-items:center;
+    }
+
+    .chat-input input {
+      background: var(--panel-soft);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:8px 12px;
+      color:var(--text);
+      font-size:13px;
+      outline:none;
+      flex:1;
+      min-width:0;
+    }
+
+    .chat-input input#nick { width:80px; }
+
+    .chat-input button {
+      padding:8px 14px;
+      border-radius:999px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+
+    @media (max-width:1100px){
+      main{grid-template-columns:1fr;}
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <button id="btn-daddy" class="active" onclick="cambiarStream('daddy')">DAZN F1 Español</button>
-        <button id="btn-espn" onclick="cambiarStream('espn')">ESPN Argentina</button>
-        <button id="btn-fox" onclick="cambiarStream('fox')">Fox Sports Argentina</button>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">F1<span>Ya</span></div>
+    <div class="tabs">
+      <button class="tab active" id="btn-daddy" onclick="cambiarStream('daddy')">DAZN F1</button>
+      <button class="tab" id="btn-espn" onclick="cambiarStream('espn')">ESPN</button>
+      <button class="tab" id="btn-fox" onclick="cambiarStream('fox')">FOX</button>
     </div>
+  </div>
+</header>
 
-    <div class="container">
-        <!-- Reproductor -->
-        <div class="stream">
-            <div class="player-container">
-                <iframe id="player" src="about:blank" allowfullscreen></iframe>
-            </div>
-            <div class="controls">
-                <strong>Reproductor:</strong>
-                <button class="controls-btn" onclick="changePlayerSize(-100)">- Achicar</button>
-                <button class="controls-btn" onclick="changePlayerSize(100)">+ Agrandar</button>
-                <button class="controls-btn" onclick="movePlayer(-50)">← Izquierda</button>
-                <button class="controls-btn" onclick="movePlayer(50)">→ Derecha</button>
-                <button class="controls-btn" onclick="resetPlayer()">Reset</button>
-            </div>
-        </div>
-
-        <!-- Chat -->
-        <div class="chat-section">
-            <h2>Chat F1 en vivo</h2>
-            <div class="chat-container">
-                <iframe id="chat-iframe" src="https://xat.com/Todosobref1ahora" 
-                        allowfullscreen scrolling="no"></iframe>
-            </div>
-            <div class="controls">
-                <strong>Chat:</strong>
-                <button class="controls-btn" onclick="changeChatSize(-100)">- Achicar</button>
-                <button class="controls-btn" onclick="changeChatSize(100)">+ Agrandar</button>
-                <button class="controls-btn" onclick="moveChat(-50)">← Izquierda</button>
-                <button class="controls-btn" onclick="moveChat(50)">→ Derecha</button>
-                <button class="controls-btn" onclick="resetChat()">Reset</button>
-            </div>
-        </div>
+<main>
+  <section class="player-card">
+    <div class="player-top"><strong>Fórmula 1 · Live</strong></div>
+    <div class="player-wrap">
+      <iframe id="player" src="about:blank" allowfullscreen></iframe>
     </div>
+  </section>
 
-    <script>
-        // URLs codificadas en Base64
-        const streams = {
-            daddy: "aHR0cHM6Ly9kYWRkeWhkLmNvbS93YXRjaC9zdHJlYW0tNTM3LnBocA==",
-            espn:  "aHR0cHM6Ly9kYWRkeWhkLmNvbS9zdHJlYW0vc3RyZWFtLTE0OS5waHA=",
-            fox:   "aHR0cHM6Ly9kYWRkeWhkLmNvbS9zdHJlYW0vc3RyZWFtLTc4Ny5waHA="
-        };
+  <aside class="chat-card">
+    <div class="chat-top"><strong>Chat en vivo</strong></div>
+    <div class="chat-messages" id="messages"></div>
+    <div class="chat-input">
+      <input id="nick" placeholder="Nick" maxlength="16">
+      <input id="text" placeholder="Mensaje…">
+      <button type="button" onclick="toggleEmoji()">😀</button>
+      <button type="button" onclick="sendMsg()">Enviar</button>
+    </div>
+    <div id="emojis" style="display:none; padding:8px; border-top:1px solid var(--border)"></div>
+  </aside>
+</main>
 
-        function cambiarStream(tipo) {
-            const player = document.getElementById('player');
-            player.src = atob(streams[tipo]);
-            document.getElementById('btn-daddy').classList.toggle('active', tipo === 'daddy');
-            document.getElementById('btn-espn').classList.toggle('active', tipo === 'espn');
-            document.getElementById('btn-fox').classList.toggle('active', tipo === 'fox');
-        }
+<script type="module">
+  /* STREAMS */
+  const streams = {
+    daddy: "aHR0cHM6Ly9kYWRkeWhkLmNvbS93YXRjaC9zdHJlYW0tNTM3LnBocA==",
+    espn:  "aHR0cHM6Ly9kYWRkeWhkLmNvbS9zdHJlYW0vc3RyZWFtLTE0OS5waHA=",
+    fox:   "aHR0cHM6Ly9kYWRkeWhkLmNvbS9zdHJlYW0vc3RyZWFtLTc4Ny5waHA="
+  };
 
-        // Cargar stream por defecto
-        window.onload = function() {
-            cambiarStream('daddy');
-        };
+  const player = document.getElementById('player');
 
-        // Controles reproductor
-        const player = document.getElementById('player');
-        let playerWidth = 100;
-        let playerHeight = 600;
-        let playerMarginLeft = 0;
+  window.cambiarStream = function(tipo) {
+    player.src = atob(streams[tipo]);
+    ['daddy','espn','fox'].forEach(k =>
+      document.getElementById('btn-'+k).classList.toggle('active', k===tipo)
+    );
+  };
+  window.onload = () => cambiarStream('daddy');
 
-        function changePlayerSize(delta) {
-            playerHeight += delta;
-            playerWidth = (playerHeight / 600) * 100;
-            if (playerHeight < 300) playerHeight = 300;
-            player.style.height = playerHeight + 'px';
-            player.style.width = playerWidth + '%';
-        }
+  /* FIREBASE */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getDatabase, ref, push,
+    onChildAdded, set, onDisconnect
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        function movePlayer(delta) {
-            playerMarginLeft += delta;
-            player.style.marginLeft = playerMarginLeft + 'px';
-        }
+  const firebaseConfig = {
+    apiKey: "AIzaSyDSxZILNH92QqkfnQeSpYZeboqylAo_6S0",
+    authDomain: "sushitime-b84fc.firebaseapp.com",
+    databaseURL: "https://sushitime-b84fc-default-rtdb.firebaseio.com",
+    projectId: "sushitime-b84fc",
+    storageBucket: "sushitime-b84fc.firebasestorage.app",
+    messagingSenderId: "821112951317",
+    appId: "1:821112951317:web:5d64d505d35d4f67aab41c"
+  };
 
-        function resetPlayer() {
-            playerWidth = 100;
-            playerHeight = 600;
-            playerMarginLeft = 0;
-            player.style.width = '100%';
-            player.style.height = '600px';
-            player.style.marginLeft = '0';
-        }
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
-        // Controles chat
-        const chatIframe = document.getElementById('chat-iframe');
+  const messagesRef = ref(db, 'chat/messages');
 
-        function changeChatSize(delta) {
-            let current = parseInt(chatIframe.style.height) || 600;
-            current += delta;
-            if (current < 400) current = 400;
-            chatIframe.style.height = current + 'px';
-        }
+  const box = document.getElementById('messages');
+  const nickInput = document.getElementById('nick');
+  const textInput = document.getElementById('text');
 
-        function moveChat(delta) {
-            let current = parseInt(chatIframe.style.marginLeft) || 0;
-            current += delta;
-            chatIframe.style.marginLeft = current + 'px';
-        }
+  nickInput.value = localStorage.getItem('nick') || '';
 
-        function resetChat() {
-            chatIframe.style.height = '100%';
-            chatIframe.style.marginLeft = '0';
-        }
+  function stringToColor(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return `hsl(${hash % 360}, 70%, 60%)`;
+  }
 
-        // Activar sonidos del chat automáticamente
-        const chatFrame = document.getElementById('chat-iframe');
+  onChildAdded(messagesRef, snap => {
+    const m = snap.val();
+    const div = document.createElement('div');
+    const color = stringToColor(m.nick);
+    div.innerHTML = `<span style="color:${color};font-weight:600">${m.nick}</span>: ${m.text}`;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  });
 
-        chatFrame.addEventListener('load', function() {
-            setTimeout(function() {
-                try {
-                    const chatWindow = chatFrame.contentWindow;
-                    if (chatWindow && typeof chatWindow.chatSound === 'function') {
-                        chatWindow.chatSound(1); // 1 = activar message sound
-                        console.log('Sonidos de mensajes activados automáticamente');
-                    }
-                } catch (e) {
-                    console.log('No se pudo activar sonido automáticamente (posible restricción de iframe)');
-                }
-            }, 5000);
-        });
-    </script>
+  window.sendMsg = function () {
+    const nick = nickInput.value.trim();
+    const text = textInput.value.trim();
+    if (!nick || !text) return;
+    localStorage.setItem('nick', nick);
+    push(messagesRef, { nick, text, time: Date.now() });
+    textInput.value = '';
+  };
+
+  /* 👇 FIX CLAVE */
+  window.toggleEmoji = function () {
+    const e = document.getElementById('emojis');
+    e.style.display = (e.style.display === 'none' || !e.style.display)
+      ? 'flex'
+      : 'none';
+  };
+
+  const emojiList=['😀','😂','😍','😎','😭','🔥','👏','🤯','🏎️','🚥','🏁','⚡'];
+  const emojiBox=document.getElementById('emojis');
+  emojiBox.style.flexWrap='wrap';
+  emojiBox.style.gap='6px';
+
+  emojiList.forEach(em=>{
+    const b=document.createElement('button');
+    b.textContent=em;
+    b.style.fontSize='18px';
+    b.style.background='transparent';
+    b.style.border='none';
+    b.style.cursor='pointer';
+    b.onclick=()=>{ textInput.value+=em; textInput.focus(); };
+    emojiBox.appendChild(b);
+  });
+
+  textInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMsg();
+  });
+</script>
+
 </body>
 </html>
