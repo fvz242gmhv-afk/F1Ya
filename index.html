@@ -3,7 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>F1Ya · Formula 1 Vivo Gratis</title>
+<title>F1Ya · Ver Fórmula 1 en Vivo Gratis Online - Streams HD y Chat</title>
+
+<!-- SEO Básico -->
+<meta name="description" content="F1Ya: Ver Fórmula 1 en vivo gratis online. Streams HD de DAZN F1, ESPN y FOX con chat en directo, top fans y ranking de usuarios. ¡Disfruta las carreras de F1 sin cortes!">
+<meta name="keywords" content="f1 en vivo, fórmula 1 gratis, ver f1 online, dazn f1 streaming, espn f1 en directo, fox f1 live, fórmula 1 streaming español, f1 chat en vivo, gran premio f1 gratis">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Social Shares -->
+<meta property="og:title" content="F1Ya · Ver Fórmula 1 en Vivo Gratis">
+<meta property="og:description" content="Streams HD de F1 con chat en directo y comunidad de fans. DAZN, ESPN y más canales. ¡Únete ya!">
+<meta property="og:image" content="https://tudominio.com/preview.jpg"> <!-- Cambia por una captura real de tu sitio -->
+<meta property="og:url" content="https://tudominio.com">
+<meta property="og:type" content="website">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="F1Ya · Fórmula 1 en Vivo Gratis">
+<meta property="twitter:description" content="Ver F1 gratis con chat y ranking de fans. Streams de DAZN, ESPN y FOX.">
+<meta name="twitter:image" content="https://tudominio.com/preview.jpg">
+
 <style>
   :root {
     --bg:#0a0a0a;
@@ -77,7 +96,7 @@
   .user-item img{width:20px;height:20px;border-radius:50%;object-fit:cover;}
   .admin-help{margin-top:6px;font-size:12px;color:var(--accent);}
 
-  /* Top Fans - Más compacto y con imágenes más pequeñas */
+  /* Top Fans */
   .top-fans-ticker {
     flex:1;
     overflow:hidden;
@@ -185,7 +204,7 @@
     100% { transform: scale(1); }
   }
 
-  /* ==== NUEVAS ESTILOS PARA REACCIONES Y REPLIES ==== */
+  /* Reacciones y Replies */
   .msg-reactions {
     display: flex;
     gap: 6px;
@@ -252,6 +271,20 @@
   .emoji-picker button:hover {
     background: var(--panel-soft);
   }
+
+  /* Sección SEO adicional (visible) */
+  .seo-section {
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .seo-section h2 {
+    margin-top: 0;
+    color: var(--accent);
+  }
 </style>
 </head>
 <body>
@@ -284,6 +317,14 @@
       <strong>Usuarios Registrados:</strong>
       <span id="registeredUsers"></span>
     </div>
+
+    <!-- Sección extra para SEO (visible y útil) -->
+    <div class="seo-section">
+      <h2>Fórmula 1 2025 en Vivo y Gratis</h2>
+      <p>En <strong>F1Ya</strong> puedes ver todas las carreras de Fórmula 1 en directo y completamente gratis. Streams en alta definición de DAZN F1, ESPN y FOX Sports con la mejor calidad y sin interrupciones.</p>
+      <p>Únete al chat en vivo con miles de fans, reacciona a los mensajes, responde a otros usuarios y sube en el ranking de <strong>Top Fans</strong> según las horas que pases viendo las carreras.</p>
+      <p>Disfruta de prácticas libres, clasificación y el Gran Premio completo desde cualquier dispositivo. ¡La mejor comunidad de F1 en español te espera!</p>
+    </div>
   </section>
 
   <aside class="chat-card">
@@ -313,7 +354,7 @@
   </aside>
 </main>
 
-<!-- MODALES -->
+<!-- MODALES (igual que antes) -->
 <div class="modal" id="loginModal">
   <div class="modal-content">
     <h3 id="modalTitle">Login</h3>
@@ -527,7 +568,7 @@ onAuthStateChanged(auth, async user=>{
   }
 });
 
-/* ==== REACCIONES Y REPLIES ==== */
+/* REACCIONES Y REPLIES */
 const AVAILABLE_EMOJIS = ['👍', '😂', '❤️', '🔥', '🚀', '👑', '💯', '🎉', '🤡', '🫡'];
 
 let replyToKey = null;
@@ -688,19 +729,16 @@ function addOrUpdateMessage(key, m) {
     div.dataset.bg = m.bg || 'transparent';
     div.innerHTML = content;
 
-    // Click para abrir picker de emojis
     div.addEventListener('click', (e) => {
       if (e.target.closest('.reaction-btn') || e.target.closest('.emoji-picker')) return;
       showEmojiPicker(div, key);
     });
 
-    // Click derecho o doble toque para responder
     div.addEventListener('contextmenu', (e) => {
       e.preventDefault();
       replyToMessage(key, m.nick, m.text);
     });
 
-    // Doble toque en móvil
     let tapCount = 0;
     div.addEventListener('touchend', () => {
       tapCount++;
