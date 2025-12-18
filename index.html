@@ -106,6 +106,33 @@
   .top-fans-user .hours {font-size:8.8px;color:var(--muted);margin-top:2px;}
   .top-fans-user.top-fans-first img {width:38px !important;height:38px !important;border:3px solid #ffd700 !important;box-shadow:0 0 14px rgba(255,215,0,0.9);}
   .top-fans-user.top-fans-second img {width:36px !important;height:36px !important;border:2px solid #c0c0c0 !important;box-shadow:0 0 9px rgba(192,192,192,0.5);}
+
+  /* Nueva ventana flotante para no logueados */
+  .register-prompt {
+    background: rgba(255, 45, 45, 0.9);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 11px;
+    max-width: 100%;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: none;
+    position: relative;
+    margin: 0 10px 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .register-prompt button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0 5px;
+  }
 </style>
 </head>
 <body>
@@ -134,13 +161,12 @@
       <iframe id="player" src="about:blank" allowfullscreen></iframe>
     </div>
 
-    <div class="seo-section">
-      <h2>Fórmula 1 2025 en Vivo y Gratis</h2>
-      <p>En <strong>F1Ya</strong> puedes ver todas las carreras de Fórmula 1 en directo y completamente gratis. Streams en alta definición de DAZN F1, ESPN y FOX Sports con la mejor calidad y sin interrupciones.</p>
-      <p>Únete al chat en vivo con miles de fans, reacciona a los mensajes, responde a otros usuarios y sube en el ranking de <strong>Top Fans</strong> según las horas que pases viendo las carreras.</p>
-      <p>Disfruta de prácticas libres, clasificación y el Gran Premio completo desde cualquier dispositivo. ¡La mejor comunidad de F1 en español te espera!</p>
-    </div>
-  </section>
+<div class="seo-section">
+  <h2>Fórmula 1 2025 en Vivo y Gratis</h2>
+  <p>En <strong>F1Ya</strong> puedes ver todas las carreras de Fórmula 1 en directo y completamente gratis. Streams en alta definición de DAZN F1, ESPN y FOX Sports con la mejor calidad y sin interrupciones.</p>
+  <p>Únete al chat en vivo con miles de fans, reacciona a los mensajes, responde a otros usuarios y sube en el ranking de <strong>Top Fans</strong> según las horas que pases viendo las carreras.</p>
+  <p>Disfruta de prácticas libres, clasificación y el Gran Premio completo desde cualquier dispositivo. ¡La mejor comunidad de F1 en español te espera!</p>
+</div>  </section>
 
   <aside class="chat-card">
     <div class="chat-top">
@@ -148,46 +174,52 @@
       <span class="online-count" id="onlineCount">0 online</span>
     </div>
 
-    <!-- CONTROL DE TAMAÑO DEL CHAT -->
-    <div class="chat-size-control">
-      <strong>TamañoChat</strong>
-      <button id="btnAchicarChat">–</button>
-      <span id="tamanoActual">100%</span>
-      <button id="btnAumentarChat">+</button>
-    </div>
+<!-- CONTROL DE TAMAÑO DEL CHAT -->
+<div class="chat-size-control">
+  <strong>TamañoChat</strong>
+  <button id="btnAchicarChat">–</button>
+  <span id="tamanoActual">100%</span>
+  <button id="btnAumentarChat">+</button>
+</div>
 
-    <div class="chat-messages" id="messages"></div>
-    <div id="replyIndicator" class="reply-indicator" style="display:none;">
-      <span id="replyText"></span>
-      <button style="margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;">Cancelar</button>
-    </div>
+<div class="chat-messages" id="messages"></div>
 
-    <div class="chat-input">
-      <input id="nick" disabled>
-      <span class="points-display" id="pointsDisplay" style="display:none;"></span>
-      <input id="text" placeholder="Mensaje…">
-      <button id="sendBtn">Enviar</button>
-    </div>
+<!-- Nueva ventana flotante -->
+<div id="registerPrompt" class="register-prompt">
+  <span>Registrate para tener tu propio nick en el chat. Personalizá tu perfil con una foto y colores a tu gusto. Además, accedé a encuestas y comandos exclusivos para usuarios registrados.</span>
+  <button id="closePrompt">✕</button>
+</div>
 
-    <div class="auth-buttons">
-      <button id="btnRegister">Registrarse</button>
-      <button id="btnLogin">Login</button>
-      <button id="btnLogout" style="display:none">Logout</button>
-      <button id="btnPhoto" style="display:none">Foto Perfil</button>
-      <button id="btnColorNick" style="display:none">Color Nick</button>
-      <button id="btnBgMsg" style="display:none">Fondo Mensaje</button>
-    </div>
-    <div id="adminHelp" class="admin-help" style="display:none;padding:10px 16px;font-size:12px;color:var(--accent);">
-      Comandos Admin: /limpiar | /puntos @nick cantidad
-    </div>
-  </aside>
+<div id="replyIndicator" class="reply-indicator" style="display:none;">
+  <span id="replyText"></span>
+  <button style="margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;">Cancelar</button>
+</div>
+
+<div class="chat-input">
+  <input id="nick" disabled>
+  <span class="points-display" id="pointsDisplay" style="display:none;"></span>
+  <input id="text" placeholder="Mensaje…">
+  <button id="sendBtn">Enviar</button>
+</div>
+
+<div class="auth-buttons">
+  <button id="btnRegister">Registrarse</button>
+  <button id="btnLogin">Login</button>
+  <button id="btnLogout" style="display:none">Logout</button>
+  <button id="btnPhoto" style="display:none">Foto Perfil</button>
+  <button id="btnColorNick" style="display:none">Color Nick</button>
+  <button id="btnBgMsg" style="display:none">Fondo Mensaje</button>
+</div>
+<div id="adminHelp" class="admin-help" style="display:none;padding:10px 16px;font-size:12px;color:var(--accent);">
+  Comandos Admin: /limpiar | /puntos @nick cantidad
+</div>  </aside>
 </main>
 
 <!-- Picker de reacciones -->
 <div class="reaction-picker" id="reactionPicker">
-  <button>❤️</button><button>😂</button><button>😮</button><button>😢</button><button>🙏</button><button>🔥</button>
-  <button>👍</button><button>👎</button><button>😍</button><button>🤩</button><button>🎉</button><button>😡</button>
-  <button>😎</button><button>🤔</button><button>👀</button><button>💪</button><button>🙌</button><button>🤝</button>
+  <button></button><button></button><button></button><button></button><button></button><button></button>
+  <button></button><button></button><button></button><button></button><button></button><button></button>
+  <button></button><button></button><button></button><button></button><button></button><button></button>
 </div>
 
 <!-- Modales -->
@@ -267,6 +299,8 @@ const onlineCountSpan = document.getElementById('onlineCount');
 const adminHelp = document.getElementById('adminHelp');
 const reactionPicker = document.getElementById('reactionPicker');
 const sendBtn = document.getElementById('sendBtn');
+const registerPrompt = document.getElementById('registerPrompt');
+const closePrompt = document.getElementById('closePrompt');
 
 let currentNick = 'Guest'+Math.random().toString(36).substring(2,6).toUpperCase();
 let currentColor = '#ffffff';
@@ -314,6 +348,7 @@ function renderTopFans(data) {
 onAuthStateChanged(auth, async user => {
   pointsDisplay.style.display = 'none';
   adminHelp.style.display = 'none';
+  registerPrompt.style.display = 'none';
 
   if (user) {
     currentUID = user.uid;
@@ -360,8 +395,14 @@ onAuthStateChanged(auth, async user => {
     document.getElementById('btnLogout').style.display = 'none';
     document.getElementById('btnRegister').style.display = 'block';
     document.getElementById('btnLogin').style.display = 'block';
+
+    registerPrompt.style.display = 'flex';
   }
 });
+
+closePrompt.onclick = () => {
+  registerPrompt.style.display = 'none';
+};
 
 /* Personalización y modales */
 document.getElementById('btnRegister').onclick = () => openModal('register');
@@ -578,6 +619,14 @@ function renderMessage(s) {
 }
 
 /* Picker de reacciones */
+// Arreglo de emojis para el picker (agregado para que se vean los emojis)
+const emojis = ['👍', '❤️', '😂', '😮', '😢', '😡', '👏', '🔥', '🎉', '🤔', '😍', '🙌', '😎', '🤯', '💯', '👀', '🤝', '💪'];
+reactionPicker.querySelectorAll('button').forEach((btn, i) => {
+  if (emojis[i]) {
+    btn.textContent = emojis[i];
+  }
+});
+
 reactionPicker.querySelectorAll('button').forEach(btn => {
   btn.onclick = async () => {
     if (!currentUID) { alert('Inicia sesión para reaccionar'); reactionPicker.style.display = 'none'; return; }
@@ -600,20 +649,20 @@ document.addEventListener('click', e => {
 });
 
 /* Mensajes en tiempo real */
-const messagesQuery = query(messagesRef, limitToLast(100));
+const messagesQuery = query(messagesRef, limitToLast(10));
 onChildAdded(messagesQuery, s => {
   const div = renderMessage(s);
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
 });
 
-onChildRemoved(messagesRef, s => {
+onChildRemoved(messagesQuery, s => {
   const el = box.querySelector(`.msg[data-key="${s.key}"]`);
   if (el) el.remove();
 });
 
 /* Actualizar reacciones en tiempo real */
-onValue(messagesRef, snap => {
+onValue(messagesQuery, snap => {
   snap.forEach(child => {
     const key = child.key;
     const el = box.querySelector(`.msg[data-key="${key}"]`);
