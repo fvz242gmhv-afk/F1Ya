@@ -15,7 +15,13 @@ h2{text-align:center;color:#e10600}
 .role img{width:26px;height:26px;border-radius:4px}
 input{padding:6px;border-radius:6px;border:none}
 button{padding:8px;border:none;border-radius:6px;cursor:pointer}
-.save{width:100%;margin-top:15px;padding:12px;background:#e10600;color:white;font-size:16px}
+.save{width:100%;margin-top:15px;padding:12px;background:#e10600;color:white;font-size:16px;transition:0.3s;}
+.save:disabled {
+  background:#444;
+  color:#888;
+  cursor:not-allowed;
+  opacity:0.6;
+}
 .edit{background:#444;color:white}
 .delete{background:#b00020;color:white}
 .preview{max-width:100%;border-radius:6px;cursor:pointer;border:1px solid #444;margin-top:8px}
@@ -60,6 +66,92 @@ button{padding:8px;border:none;border-radius:6px;cursor:pointer}
   margin-top:10px;
   font-size:14px;
 }
+
+/* PANEL DE LOGIN COMPACTO */
+.auth-box{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  background:#111;
+  padding: 10px 15px;
+  border-radius:8px;
+  border:1px solid #e10600;
+  margin-bottom:20px;
+  font-size:14px;
+}
+.auth-box h3{
+  margin:0;
+  font-size:15px;
+  color:#e10600;
+  white-space: nowrap;
+}
+.auth-box input{
+  width:180px;
+  padding:5px 8px;
+  font-size:13px;
+  flex-grow:1;
+  min-width:150px;
+}
+.auth-box button{
+  padding:5px 12px;
+  font-size:13px;
+  white-space: nowrap;
+}
+#authStatus{
+  margin:0;
+  font-size:13px;
+  min-width:150px;
+}
+
+/* FILA DE BOTONES DE BUILDS - MÁS COMPACTOS */
+.builds-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* BOTONES DE BUILD MÁS PEQUEÑOS */
+.build-container {
+  position: relative;
+  display: inline-block;
+}
+.build-btn {
+  padding: 6px 12px;
+  background: linear-gradient(90deg, #e10600, #ff4500);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: default;
+  white-space: nowrap;
+}
+.build-btn:hover + .tooltip {
+  display: block;
+}
+.tooltip {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 8px;
+  background: #111;
+  color: #ffd700;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e10600;
+  width: 300px;
+  box-shadow: 0 8px 15px rgba(225,6,0,0.3);
+  z-index: 10;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.tooltip strong {
+  color: white;
+}
 </style>
 </head>
 
@@ -69,9 +161,161 @@ button{padding:8px;border:none;border-radius:6px;cursor:pointer}
 
 <div class="container">
 
+<!-- Panel de login compacto -->
+<div class="auth-box" id="authBox">
+  <h3>🔐 Admin</h3>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Contraseña">
+  <button id="loginBtn">Iniciar Sesión</button>
+  <button id="logoutBtn" style="display:none;background:#444;">Cerrar Sesión</button>
+  <div id="authStatus">🔒 Solo lectura</div>
+</div>
+
+<!-- Botones de Builds compactos (los 10 completos) -->
+<div class="builds-row">
+  <div class="build-container">
+    <button class="build-btn">Build 111 - Main Tank</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Capucha De Espectro<br>
+      <strong>Pecho:</strong> Armadura de Guardian<br>
+      <strong>Botas:</strong> Zapatos Reales<br>
+      <strong>Arma:</strong> Maza Incubo<br>
+      <strong>Escudo:</strong> Aegis Astral<br>
+      <strong>Capa:</strong> Capa de Caerleon<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3 - 1<br>
+      Pecho: 3-1-2<br>
+      Botas: 3-2
+    </div>
+  </div>
+
+  <div class="build-container">
+    <button class="build-btn">Build 222 - Off Tank</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Capucha de Asesino<br>
+      <strong>Pecho:</strong> Armadura de Guardian<br>
+      <strong>Botas:</strong> Zapatos de Mercenario<br>
+      <strong>Arma:</strong> Maza Incubo<br>
+      <strong>Segunda Mano:</strong> Invocanieblas<br>
+      <strong>Capa:</strong> Capa de Contrabandistas<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3 - 3<br>
+      Pecho: 3-1-1<br>
+      Botas: 3-4
+    </div>
+  </div>
+
+  <div class="build-container">
+    <button class="build-btn">Build 333 - Healer</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Capucha de Asesino<br>
+      <strong>Pecho:</strong> Armadura Juez<br>
+      <strong>Botas:</strong> Zapatos de Mercenario<br>
+      <strong>Arma:</strong> Santificador<br>
+      <strong>Segunda Mano:</strong> Antorcha Llamazul<br>
+      <strong>Capa:</strong> Capa de Marlock<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3 - 3<br>
+      Pecho: 3-1-1<br>
+      Botas: 3-4
+    </div>
+  </div>
+
+  <div class="build-container">
+    <button class="build-btn">Build 444 - SC</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Capucha de Espectro<br>
+      <strong>Pecho:</strong> Chaqueta Real<br>
+      <strong>Botas:</strong> Zapatos de Mercenario<br>
+      <strong>Arma:</strong> Invocador Oscuro<br>
+      <strong>Segunda Mano:</strong> Invocanieblas<br>
+      <strong>Capa:</strong> Capa de Marlock<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3 - 3<br>
+      Pecho: 3-3<br>
+      Botas: 3-3
+    </div>
+  </div>
+
+  <div class="build-container">
+    <button class="build-btn">Build 555 - Truebolt Hammer</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Capucha de Asesino<br>
+      <strong>Pecho:</strong> Armadura Real<br>
+      <strong>Botas:</strong> Zapatos de Mercenario<br>
+      <strong>Arma:</strong> Martillo Relampago<br>
+      <strong>Segunda Mano:</strong> Invocanieblas<br>
+      <strong>Capa:</strong> Capa de Contrabandista<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3 - 3<br>
+      Pecho: 3-3-1<br>
+      Botas: 3-4
+    </div>
+  </div>
+
+  <div class="build-container">
+    <button class="build-btn">Build 666 - Falce</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Casco de Guardian<br>
+      <strong>Pecho:</strong> Chaqueta Real<br>
+      <strong>Botas:</strong> Zapatos de Mercenario<br>
+      <strong>Arma:</strong> Martillo Relampago<br>
+      <strong>Capa:</strong> Capa de Marlock<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3 - 1<br>
+      Pecho: 3-1<br>
+      Botas: 3-2<br>
+    </div>
+  </div>
+
+  <div class="build-container">
+    <button class="build-btn">Build 677 - Falce</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Casco de Caballero<br>
+      <strong>Pecho:</strong> Chaqueta de Tenacidad<br>
+      <strong>Botas:</strong> Zapatos de Mercenario<br>
+      <strong>Arma:</strong> Martillo Relampago<br>
+      <strong>Capa:</strong> Capa de Marlock<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3 - 3<br>
+      Pecho: 3-1<br>
+      Botas: 3-2<br>
+    </div>
+  </div>
+
+  <div class="build-container">
+    <button class="build-btn">Build 688 - Falce</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Casco de Acechador<br>
+      <strong>Pecho:</strong> Chaqueta de Vandalo<br>
+      <strong>Botas:</strong> Zapatos de Mercenario<br>
+      <strong>Arma:</strong> Falce de Cristal<br>
+      <strong>Capa:</strong> Capa de Marlock<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3-3<br>
+      Pecho: 3-1<br>
+      Botas: 3-2<br> 
+    </div>
+  </div>
+
+  <div class="build-container">
+    <button class="build-btn">Build 777 - Enraizado</button>
+    <div class="tooltip">
+      <strong>Casco:</strong> Casco de Caballero<br>
+      <strong>Pecho:</strong> Armadura de Juez<br>
+      <strong>Botas:</strong> Zapatos de Mercenario<br>
+      <strong>Arma:</strong> Enraizado<br>
+      <strong>Capa:</strong> Capa de Marlock<br><br>
+      <strong>Pasivas:</strong><br>
+      Casco: 3-1<br>
+      Pecho: 3-1-1<br>
+      Botas: 3-2<br>
+    </div>
+  </div>
+</div>
+
 <div id="party"></div>
 
-<!-- Primera imagen -->
 <div class="image-section">
   <div class="label-text">IMAGEN 1 - LOOT COMPLETO O PRINCIPAL</div>
   <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
@@ -81,7 +325,6 @@ button{padding:8px;border:none;border-radius:6px;cursor:pointer}
   <img id="imagePreview1" class="preview" style="display:none">
 </div>
 
-<!-- Segunda imagen -->
 <div class="image-section">
   <div class="label-text">IMAGEN 2 - DPS METER (OPCIONAL)</div>
   <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
@@ -91,24 +334,23 @@ button{padding:8px;border:none;border-radius:6px;cursor:pointer}
   <img id="imagePreview2" class="preview" style="display:none">
 </div>
 
-<!-- Archivo adjunto por URL - Solo botón de catbox -->
 <div class="image-section">
-  <div class="label-text">ARCHIVO REGISTRO LOOT - sube tu archivo y pega el url.</div>
+  <div class="label-text">ARCHIVO REGISTRO LOOT</div>
   <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
     <input id="fileUrl" placeholder="Pega aquí el URL directo del archivo" style="flex:1">
     <a href="https://catbox.moe/" target="_blank" class="mini-btn">Subir a catbox</a>
   </div>
   <div style="font-size:13px;color:#aaa;">
-    Usa <strong>catbox.moe</strong> → permite .txt, .log, .csv, .pdf, .zip sin registro y da enlace directo.
+    Usa <strong>catbox.moe</strong> → permite .txt, .log, .csv, .pdf, .zip sin registro.
   </div>
 </div>
 
 <input id="silver" type="text" placeholder="Total Silver" style="width:100%;margin-top:10px" value="4.5m">
 
-<button class="save" id="saveBtn">Guardar Run</button>
+<button class="save" id="saveBtn" disabled>Guardar Run</button>
 
 <h2>Runs Guardadas</h2>
-<div id="runs"><p style="text-align:center;color:#aaa;">Cargando runs... (si no aparece nada, revisa la consola)</p></div>
+<div id="runs"><p style="text-align:center;color:#aaa;">Cargando runs...</p></div>
 
 <h2>Estadísticas</h2>
 <div class="stats">
@@ -127,7 +369,7 @@ button{padding:8px;border:none;border-radius:6px;cursor:pointer}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getDatabase, ref, push, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDSxZILNH92QqkfnQeSpYZeboqylAo_6S0",
@@ -143,10 +385,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
-
-signInAnonymously(auth)
-  .then(() => console.log("Autenticado anónimamente con éxito"))
-  .catch(err => console.error("Error en autenticación:", err));
 
 const partyDiv = document.getElementById("party");
 const imageUrlInput1 = document.getElementById("imageUrl1");
@@ -164,14 +402,52 @@ const totalSilverEl = document.getElementById("totalSilver");
 const modalImg = document.getElementById("modalImg");
 const imageModal = document.getElementById("imageModal");
 
-let editingRunId = null;
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+const authStatus = document.getElementById("authStatus");
 
-function pedirContraseña() {
-  const entrada = prompt("Ingresa la contraseña para realizar esta acción:");
-  if (entrada === null) return false;
-  const hashEsperado = [49,53,57,56,55].map(c => String.fromCharCode(c)).join('');
-  return entrada === hashEsperado;
-}
+let editingRunId = null;
+let currentUser = null;
+
+loginBtn.onclick = () => {
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+  if (!email || !password) return alert("Ingresa email y contraseña");
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then(() => {})
+    .catch((error) => {
+      alert("Error de login: " + error.message);
+    });
+};
+
+logoutBtn.onclick = () => {
+  signOut(auth);
+};
+
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+  if (user) {
+    authStatus.innerHTML = `✅ ${user.email}`;
+    authStatus.style.color = "#4ade80";
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+    emailInput.style.display = "none";
+    passwordInput.style.display = "none";
+    saveBtn.disabled = false;
+    saveBtn.textContent = editingRunId ? "Actualizar Run" : "Guardar Run";
+  } else {
+    authStatus.textContent = "🔒 Solo lectura";
+    authStatus.style.color = "#ff4d4d";
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+    emailInput.style.display = "inline-block";
+    passwordInput.style.display = "inline-block";
+    saveBtn.disabled = true;
+  }
+});
 
 const roles = [
   ["(111) Main Tank", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPm9NhzKzVrl7MrCGwW5GQdSkaPeZDKkmfZbVVQyOlXOk06moNeOY0IBgm&s"],
@@ -223,6 +499,11 @@ imagePreview1.onclick = imagePreview2.onclick = (e) => {
 };
 
 saveBtn.onclick = async () => {
+  if (!currentUser) {
+    alert("Debes iniciar sesión para guardar runs.");
+    return;
+  }
+
   const players = document.querySelectorAll(".player");
   const deadChecks = document.querySelectorAll(".deadCheck");
   const killedByInputs = document.querySelectorAll(".killedBy");
@@ -263,7 +544,7 @@ saveBtn.onclick = async () => {
     }
     resetForm();
   } catch (err) {
-    console.error("Error al guardar:", err);
+    console.error("Error:", err);
     alert("Error al guardar: " + err.message);
   }
 };
@@ -282,10 +563,8 @@ function resetForm() {
 
 const runsRef = ref(db, "runs");
 onValue(runsRef, (snapshot) => {
-  const data = snapshot.val();
   runsDiv.innerHTML = "";
-
-  if (!data) {
+  if (!snapshot.val()) {
     runsDiv.innerHTML = '<p style="text-align:center;color:#aaa;">Aún no hay runs guardadas</p>';
     mostDeathsEl.textContent = "-";
     mostPlayedEl.textContent = "-";
@@ -308,7 +587,7 @@ onValue(runsRef, (snapshot) => {
     else silverNum = parseFloat(silverStr) || 0;
     totalSilver += silverNum;
 
-    const partyArray = Array.isArray(run.party) ? run.party : [];
+    const partyArray = run.party;
 
     const detailsHTML = partyArray.map(p => {
       const imgSrc = roles.find(r => r[0] === p.role)?.[1] || '';
@@ -323,26 +602,14 @@ onValue(runsRef, (snapshot) => {
 
     let imagesHTML = "";
     if (run.imageUrl1) {
-      imagesHTML += `
-        <div>
-          <div class="image-title">Loot Completo / Principal</div>
-          <img src="${run.imageUrl1}" class="preview" onclick="openImage('${run.imageUrl1}')">
-        </div>`;
+      imagesHTML += `<div><div class="image-title">Loot Completo / Principal</div><img src="${run.imageUrl1}" class="preview" onclick="openImage('${run.imageUrl1}')"></div>`;
     }
     if (run.imageUrl2) {
-      imagesHTML += `
-        <div>
-          <div class="image-title">DPS Meter</div>
-          <img src="${run.imageUrl2}" class="preview" onclick="openImage('${run.imageUrl2}')">
-        </div>`;
+      imagesHTML += `<div><div class="image-title">DPS Meter</div><img src="${run.imageUrl2}" class="preview" onclick="openImage('${run.imageUrl2}')"></div>`;
     }
     if (run.fileUrl) {
       const fileName = decodeURIComponent(run.fileUrl.split('/').pop().split('?')[0]) || 'archivo_adjunto';
-      imagesHTML += `
-        <div>
-          <div class="image-title">Registro Loot</div>
-          <a href="${run.fileUrl}" target="_blank" class="download-btn">⬇ Descargar ${fileName}</a>
-        </div>`;
+      imagesHTML += `<div><div class="image-title">Registro Loot</div><a href="${run.fileUrl}" target="_blank" class="download-btn">⬇ Descargar ${fileName}</a></div>`;
     }
 
     runsDiv.innerHTML += `
@@ -351,7 +618,7 @@ onValue(runsRef, (snapshot) => {
           <span>${new Date(run.timestamp).toLocaleString()} — <strong>Main Tank: ${partyArray[0]?.name || 'Desconocido'}</strong></span>
           <span>${run.silver}</span>
         </div>
-        <div style="margin-top:8px; display:flex; gap:6px;">
+        <div style="margin-top:8px;display:flex;gap:6px;">
           <button class="edit" onclick="protectedEdit('${key}')">Editar</button>
           <button class="delete" onclick="protectedDelete('${key}')">Borrar</button>
           <button onclick="toggleDetails(this)">Ver detalles</button>
@@ -370,28 +637,37 @@ onValue(runsRef, (snapshot) => {
     });
   });
 
+  const playsFiltered = {};
+  Object.entries(plays).forEach(([name, count]) => {
+    if (name !== "EasyGood") {
+      playsFiltered[name] = count;
+    }
+  });
+
   const topDeaths = Object.entries(deaths).sort((a,b)=>b[1]-a[1])[0];
-  const topPlayed = Object.entries(plays).sort((a,b)=>b[1]-a[1])[0];
+  const topPlayed = Object.entries(playsFiltered).sort((a,b)=>b[1]-a[1])[0];
   const topTank = Object.entries(tank).sort((a,b)=>b[1]-a[1])[0];
 
   mostDeathsEl.textContent = topDeaths ? `${topDeaths[0]} (${topDeaths[1]})` : "-";
   mostPlayedEl.textContent = topPlayed ? `${topPlayed[0]} (${topPlayed[1]})` : "-";
   mainTankEl.textContent = topTank ? `${topTank[0]} (${topTank[1]})` : "-";
   totalSilverEl.textContent = `${(totalSilver/1_000_000).toFixed(2)}m`;
-}, (error) => {
-  runsDiv.innerHTML = `<p style="color:red;text-align:center;">Error al cargar runs: ${error.message}</p>`;
 });
 
 window.protectedEdit = (id) => {
-  if (pedirContraseña()) {
-    editRun(id);
+  if (!currentUser) {
+    alert("Debes iniciar sesión para editar.");
+    return;
   }
+  editRun(id);
 };
 
 window.protectedDelete = (id) => {
-  if (pedirContraseña()) {
-    deleteRun(id);
+  if (!currentUser) {
+    alert("Debes iniciar sesión para borrar.");
+    return;
   }
+  deleteRun(id);
 };
 
 window.toggleDetails = (button) => {
@@ -402,12 +678,11 @@ window.toggleDetails = (button) => {
 window.editRun = (id) => {
   onValue(ref(db, `runs/${id}`), snap => {
     const run = snap.val();
-    if (!run || !run.party) {
-      alert("Run inválida o incompleta.");
-      return;
-    }
+    if (!run || !run.party) return alert("Run inválida.");
+
     editingRunId = id;
     saveBtn.textContent = "Actualizar Run";
+    saveBtn.disabled = false;
 
     const players = document.querySelectorAll(".player");
     const deadChecks = document.querySelectorAll(".deadCheck");
@@ -426,18 +701,8 @@ window.editRun = (id) => {
     imageUrlInput2.value = run.imageUrl2 || "";
     fileUrlInput.value = run.fileUrl || "";
 
-    if (run.imageUrl1) {
-      imagePreview1.src = run.imageUrl1;
-      imagePreview1.style.display = "block";
-    } else {
-      imagePreview1.style.display = "none";
-    }
-    if (run.imageUrl2) {
-      imagePreview2.src = run.imageUrl2;
-      imagePreview2.style.display = "block";
-    } else {
-      imagePreview2.style.display = "none";
-    }
+    if (run.imageUrl1) { imagePreview1.src = run.imageUrl1; imagePreview1.style.display = "block"; }
+    if (run.imageUrl2) { imagePreview2.src = run.imageUrl2; imagePreview2.style.display = "block"; }
   }, { onlyOnce: true });
 };
 
