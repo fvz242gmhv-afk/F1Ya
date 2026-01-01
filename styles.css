@@ -667,6 +667,62 @@ body {
     }
 }
 
+/* ===== VIDEO SECTION ===== */
+.video-section {
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+
+.video-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.video-description {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-container {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-bottom: 39.375%;
+    /* 16:9 aspect ratio (9/16 * 70% width) */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    background: var(--bg-card);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    transition: var(--transition-normal);
+}
+
+.video-container:hover {
+    border-color: rgba(102, 126, 234, 0.5);
+    box-shadow: var(--shadow-glow), var(--shadow-xl);
+    transform: translateY(-5px);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-lg);
+}
+
 /* ===== DOWNLOAD SECTION ===== */
 .download {
     padding: var(--spacing-xl) 0;
