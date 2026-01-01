@@ -1,721 +1,279 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>The Rugrats World Boss Logs</title>
-
-<style>
-body{font-family:Arial;background:#0f0f0f;color:white;padding:20px;margin:0;overflow-x:hidden;}
-h1{text-align:center;font-size:36px;background:linear-gradient(90deg,#e10600,#ff7b00,#e10600);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:glow 3s infinite}
-@keyframes glow{0%{text-shadow:0 0 5px #e10600}50%{text-shadow:0 0 20px #ff7b00}100%{text-shadow:0 0 5px #e10600}}
-h2{text-align:center;color:#e10600}
-.container{max-width:1200px;margin:auto;background:#1a1a1a;padding:20px;border-radius:12px;border:2px solid #e10600;position:relative;z-index:1}
-.member{display:grid;grid-template-columns:280px 1fr 80px 1fr;gap:8px;margin-bottom:8px;align-items:center}
-.role{display:flex;align-items:center;gap:6px;font-size:13px}
-.role img{width:26px;height:26px;border-radius:4px}
-input{padding:6px;border-radius:6px;border:none}
-button{padding:8px;border:none;border-radius:6px;cursor:pointer}
-.save{width:100%;margin-top:15px;padding:12px;background:#e10600;color:white;font-size:16px;transition:0.3s;}
-.save:disabled {
-  background:#444;
-  color:#888;
-  cursor:not-allowed;
-  opacity:0.6;
-}
-.edit{background:#444;color:white}
-.delete{background:#b00020;color:white}
-.preview{max-width:100%;border-radius:6px;cursor:pointer;border:1px solid #444;margin-top:8px}
-.run{margin-top:10px;background:#111;border-radius:8px;padding:10px}
-.run-header{display:flex;justify-content:space-between;font-weight:bold}
-.run-details{display:none;margin-top:8px}
-.dead{color:#ff4d4d}
-.alive{color:#4ade80}
-.killedby{color:#aaa;font-size:13px}
-.stats{margin-top:25px;background:#111;padding:15px;border-radius:10px}
-.highlight{color:#ffd700;text-shadow:0 0 10px #ffd700;font-weight:bold}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;z-index:999}
-.modal img{max-width:95%;max-height:95%;border-radius:10px}
-.mini-btn{
-  padding:4px 8px;
-  background:#e10600;
-  color:white;
-  border-radius:4px;
-  text-decoration:none;
-  font-size:11px;
-  white-space:nowrap;
-}
-.label-text{
-  font-size:14px;
-  margin-bottom:4px;
-  color:#ffd700;
-}
-.image-section{margin-bottom:20px;}
-.image-title{
-  font-size:15px;
-  color:#ffd700;
-  margin:15px 0 8px 0;
-  font-weight:bold;
-}
-.download-btn{
-  display:inline-block;
-  padding:8px 12px;
-  background:#e10600;
-  color:white;
-  border-radius:6px;
-  text-decoration:none;
-  margin-top:10px;
-  font-size:14px;
-}
-
-/* PANEL DE LOGIN COMPACTO */
-.auth-box{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  background:#111;
-  padding: 10px 15px;
-  border-radius:8px;
-  border:1px solid #e10600;
-  margin-bottom:20px;
-  font-size:14px;
-}
-.auth-box h3{
-  margin:0;
-  font-size:15px;
-  color:#e10600;
-  white-space: nowrap;
-}
-.auth-box input{
-  width:180px;
-  padding:5px 8px;
-  font-size:13px;
-  flex-grow:1;
-  min-width:150px;
-}
-.auth-box button{
-  padding:5px 12px;
-  font-size:13px;
-  white-space: nowrap;
-}
-#authStatus{
-  margin:0;
-  font-size:13px;
-  min-width:150px;
-}
-
-/* FILA DE BOTONES DE BUILDS - MÁS COMPACTOS */
-.builds-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-/* BOTONES DE BUILD MÁS PEQUEÑOS */
-.build-container {
-  position: relative;
-  display: inline-block;
-}
-.build-btn {
-  padding: 6px 12px;
-  background: linear-gradient(90deg, #e10600, #ff4500);
-  color: white;
-  font-size: 13px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: default;
-  white-space: nowrap;
-}
-.build-btn:hover + .tooltip {
-  display: block;
-}
-.tooltip {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 100%;
-  margin-top: 8px;
-  background: #111;
-  color: #ffd700;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #e10600;
-  width: 300px;
-  box-shadow: 0 8px 15px rgba(225,6,0,0.3);
-  z-index: 10;
-  font-size: 13px;
-  line-height: 1.5;
-}
-.tooltip strong {
-  color: white;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="HCEMetterDPS - Medidor de DPS en tiempo real para Albion Online. Rastrea el daño de tu party y mejora tu rendimiento en combate.">
+    <title>HCEMetterDPS - Medidor de DPS para Albion Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-
-<h1>The Rugrats World Boss Logs</h1>
-
-<div class="container">
-
-<!-- Panel de login compacto -->
-<div class="auth-box" id="authBox">
-  <h3>🔐 Admin</h3>
-  <input id="email" type="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Contraseña">
-  <button id="loginBtn">Iniciar Sesión</button>
-  <button id="logoutBtn" style="display:none;background:#444;">Cerrar Sesión</button>
-  <div id="authStatus">🔒 Solo lectura</div>
-</div>
-
-<!-- Botones de Builds compactos (los 10 completos) -->
-<div class="builds-row">
-  <div class="build-container">
-    <button class="build-btn">Build 111 - Main Tank</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Capucha De Espectro<br>
-      <strong>Pecho:</strong> Armadura de Guardian<br>
-      <strong>Botas:</strong> Zapatos Reales<br>
-      <strong>Arma:</strong> Maza Incubo<br>
-      <strong>Escudo:</strong> Aegis Astral<br>
-      <strong>Capa:</strong> Capa de Caerleon<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3 - 1<br>
-      Pecho: 3-1-2<br>
-      Botas: 3-2
-    </div>
-  </div>
-
-  <div class="build-container">
-    <button class="build-btn">Build 222 - Off Tank</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Capucha de Asesino<br>
-      <strong>Pecho:</strong> Armadura de Guardian<br>
-      <strong>Botas:</strong> Zapatos de Mercenario<br>
-      <strong>Arma:</strong> Maza Incubo<br>
-      <strong>Segunda Mano:</strong> Invocanieblas<br>
-      <strong>Capa:</strong> Capa de Contrabandistas<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3 - 3<br>
-      Pecho: 3-1-1<br>
-      Botas: 3-4
-    </div>
-  </div>
-
-  <div class="build-container">
-    <button class="build-btn">Build 333 - Healer</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Capucha de Asesino<br>
-      <strong>Pecho:</strong> Armadura Juez<br>
-      <strong>Botas:</strong> Zapatos de Mercenario<br>
-      <strong>Arma:</strong> Santificador<br>
-      <strong>Segunda Mano:</strong> Antorcha Llamazul<br>
-      <strong>Capa:</strong> Capa de Marlock<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3 - 3<br>
-      Pecho: 3-1-1<br>
-      Botas: 3-4
-    </div>
-  </div>
-
-  <div class="build-container">
-    <button class="build-btn">Build 444 - SC</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Capucha de Espectro<br>
-      <strong>Pecho:</strong> Chaqueta Real<br>
-      <strong>Botas:</strong> Zapatos de Mercenario<br>
-      <strong>Arma:</strong> Invocador Oscuro<br>
-      <strong>Segunda Mano:</strong> Invocanieblas<br>
-      <strong>Capa:</strong> Capa de Marlock<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3 - 3<br>
-      Pecho: 3-3<br>
-      Botas: 3-3
-    </div>
-  </div>
-
-  <div class="build-container">
-    <button class="build-btn">Build 555 - Truebolt Hammer</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Capucha de Asesino<br>
-      <strong>Pecho:</strong> Armadura Real<br>
-      <strong>Botas:</strong> Zapatos de Mercenario<br>
-      <strong>Arma:</strong> Martillo Relampago<br>
-      <strong>Segunda Mano:</strong> Invocanieblas<br>
-      <strong>Capa:</strong> Capa de Contrabandista<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3 - 3<br>
-      Pecho: 3-3-1<br>
-      Botas: 3-4
-    </div>
-  </div>
-
-  <div class="build-container">
-    <button class="build-btn">Build 666 - Falce</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Casco de Guardian<br>
-      <strong>Pecho:</strong> Chaqueta Real<br>
-      <strong>Botas:</strong> Zapatos de Mercenario<br>
-      <strong>Arma:</strong> Martillo Relampago<br>
-      <strong>Capa:</strong> Capa de Marlock<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3 - 1<br>
-      Pecho: 3-1<br>
-      Botas: 3-2<br>
-    </div>
-  </div>
-
-  <div class="build-container">
-    <button class="build-btn">Build 677 - Falce</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Casco de Caballero<br>
-      <strong>Pecho:</strong> Chaqueta de Tenacidad<br>
-      <strong>Botas:</strong> Zapatos de Mercenario<br>
-      <strong>Arma:</strong> Martillo Relampago<br>
-      <strong>Capa:</strong> Capa de Marlock<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3 - 3<br>
-      Pecho: 3-1<br>
-      Botas: 3-2<br>
-    </div>
-  </div>
-
-  <div class="build-container">
-    <button class="build-btn">Build 688 - Falce</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Casco de Acechador<br>
-      <strong>Pecho:</strong> Chaqueta de Vandalo<br>
-      <strong>Botas:</strong> Zapatos de Mercenario<br>
-      <strong>Arma:</strong> Falce de Cristal<br>
-      <strong>Capa:</strong> Capa de Marlock<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3-3<br>
-      Pecho: 3-1<br>
-      Botas: 3-2<br> 
-    </div>
-  </div>
-
-  <div class="build-container">
-    <button class="build-btn">Build 777 - Enraizado</button>
-    <div class="tooltip">
-      <strong>Casco:</strong> Casco de Caballero<br>
-      <strong>Pecho:</strong> Armadura de Juez<br>
-      <strong>Botas:</strong> Zapatos de Mercenario<br>
-      <strong>Arma:</strong> Enraizado<br>
-      <strong>Capa:</strong> Capa de Marlock<br><br>
-      <strong>Pasivas:</strong><br>
-      Casco: 3-1<br>
-      Pecho: 3-1-1<br>
-      Botas: 3-2<br>
-    </div>
-  </div>
-</div>
-
-<div id="party"></div>
-
-<div class="image-section">
-  <div class="label-text">IMAGEN 1 - LOOT COMPLETO O PRINCIPAL</div>
-  <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-    <input id="imageUrl1" placeholder="Pega aquí el URL directa de la imagen 1" style="flex:1">
-    <a href="https://postimages.org/" target="_blank" class="mini-btn">Subir imagen</a>
-  </div>
-  <img id="imagePreview1" class="preview" style="display:none">
-</div>
-
-<div class="image-section">
-  <div class="label-text">IMAGEN 2 - DPS METER (OPCIONAL)</div>
-  <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-    <input id="imageUrl2" placeholder="Pega aquí el URL directa de la imagen 2 (opcional)" style="flex:1">
-    <a href="https://postimages.org/" target="_blank" class="mini-btn">Subir imagen</a>
-  </div>
-  <img id="imagePreview2" class="preview" style="display:none">
-</div>
-
-<div class="image-section">
-  <div class="label-text">ARCHIVO REGISTRO LOOT</div>
-  <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-    <input id="fileUrl" placeholder="Pega aquí el URL directo del archivo" style="flex:1">
-    <a href="https://catbox.moe/" target="_blank" class="mini-btn">Subir a catbox</a>
-  </div>
-  <div style="font-size:13px;color:#aaa;">
-    Usa <strong>catbox.moe</strong> → permite .txt, .log, .csv, .pdf, .zip sin registro.
-  </div>
-</div>
-
-<input id="silver" type="text" placeholder="Total Silver" style="width:100%;margin-top:10px" value="4.5m">
-
-<button class="save" id="saveBtn" disabled>Guardar Run</button>
-
-<h2>Runs Guardadas</h2>
-<div id="runs"><p style="text-align:center;color:#aaa;">Cargando runs...</p></div>
-
-<h2>Estadísticas</h2>
-<div class="stats">
-☠️ Más muertes: <strong id="mostDeaths">-</strong><br><br>
-📝 Más jugado: <strong id="mostPlayed">-</strong><br><br>
-🛡️ Main Tank Más Activo: <strong id="mainTank" class="highlight">-</strong><br><br>
-☑️ Total Silver Loot: <strong id="totalSilver">-</strong><br><br>
-</div>
-
-</div>
-
-<div class="modal" id="imageModal" onclick="this.style.display='none'">
-<img id="modalImg">
-</div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getDatabase, ref, push, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDSxZILNH92QqkfnQeSpYZeboqylAo_6S0",
-  authDomain: "sushitime-b84fc.firebaseapp.com",
-  databaseURL: "https://sushitime-b84fc-default-rtdb.firebaseio.com",
-  projectId: "sushitime-b84fc",
-  storageBucket: "sushitime-b84fc.firebasestorage.app",
-  messagingSenderId: "821112951317",
-  appId: "1:821112951317:web:0f104e0aea3b3d14aab41c",
-  measurementId: "G-CBH676TZ3S"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const auth = getAuth(app);
-
-const partyDiv = document.getElementById("party");
-const imageUrlInput1 = document.getElementById("imageUrl1");
-const imageUrlInput2 = document.getElementById("imageUrl2");
-const fileUrlInput = document.getElementById("fileUrl");
-const imagePreview1 = document.getElementById("imagePreview1");
-const imagePreview2 = document.getElementById("imagePreview2");
-const silverInput = document.getElementById("silver");
-const saveBtn = document.getElementById("saveBtn");
-const runsDiv = document.getElementById("runs");
-const mostDeathsEl = document.getElementById("mostDeaths");
-const mostPlayedEl = document.getElementById("mostPlayed");
-const mainTankEl = document.getElementById("mainTank");
-const totalSilverEl = document.getElementById("totalSilver");
-const modalImg = document.getElementById("modalImg");
-const imageModal = document.getElementById("imageModal");
-
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const authStatus = document.getElementById("authStatus");
-
-let editingRunId = null;
-let currentUser = null;
-
-loginBtn.onclick = () => {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-  if (!email || !password) return alert("Ingresa email y contraseña");
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => {})
-    .catch((error) => {
-      alert("Error de login: " + error.message);
-    });
-};
-
-logoutBtn.onclick = () => {
-  signOut(auth);
-};
-
-onAuthStateChanged(auth, (user) => {
-  currentUser = user;
-  if (user) {
-    authStatus.innerHTML = `✅ ${user.email}`;
-    authStatus.style.color = "#4ade80";
-    loginBtn.style.display = "none";
-    logoutBtn.style.display = "inline-block";
-    emailInput.style.display = "none";
-    passwordInput.style.display = "none";
-    saveBtn.disabled = false;
-    saveBtn.textContent = editingRunId ? "Actualizar Run" : "Guardar Run";
-  } else {
-    authStatus.textContent = "🔒 Solo lectura";
-    authStatus.style.color = "#ff4d4d";
-    loginBtn.style.display = "inline-block";
-    logoutBtn.style.display = "none";
-    emailInput.style.display = "inline-block";
-    passwordInput.style.display = "inline-block";
-    saveBtn.disabled = true;
-  }
-});
-
-const roles = [
-  ["(111) Main Tank", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPm9NhzKzVrl7MrCGwW5GQdSkaPeZDKkmfZbVVQyOlXOk06moNeOY0IBgm&s"],
-  ["(222) Off Tank", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_bMRn1s0zb5NMXzx9pKA9Dt5vZSt16pvZMN_RaMkF5kw1aWkr5TYcoVc&s"],
-  ["(333) Healer", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVyXHLZlSGSoLTaejlh8wLHh0Mv3BDSA2PipLqvnn0pSGLQUmBSN8gngIg&s"],
-  ["(444) Sc", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAm5jnLqjMAMgMsPZd5rQUv1lzDnDsx4BHc0wX9sV2XCEyVcl_ZDDvb-A2&s"],
-  ["(555) Truebolt hammer", "https://render.albiononline.com/v1/item/T8_2H_HAMMER_CRYSTAL@2.png"],
-  ["(666)", "https://render.albiononline.com/v1/item/T8_2H_SCYTHE_CRYSTAL.png"],
-  ["(677)", "https://render.albiononline.com/v1/item/T8_2H_SCYTHE_CRYSTAL.png"],
-  ["(688)", "https://render.albiononline.com/v1/item/T8_2H_SCYTHE_CRYSTAL.png"],
-  ["(688)", "https://render.albiononline.com/v1/item/T8_2H_SCYTHE_CRYSTAL.png"],
-  ["(777) Rootbound", "https://render.albiononline.com/v1/item/T8_2H_SHAPESHIFTER_SET2.png"]
-];
-
-roles.forEach((role, i) => {
-  const playerNumber = i + 1;
-  const placeholderText = playerNumber === 9 ? "Jugador 9" : playerNumber === 10 ? "Jugador 10" : `Jugador ${playerNumber}`;
-  
-  partyDiv.innerHTML += `
-    <div class="member">
-      <div class="role"><img src="${role[1]}" alt=""> ${role[0]}</div>
-      <input class="player" placeholder="${placeholderText}">
-      <label><input type="checkbox" class="deadCheck"> Muerto</label>
-      <input class="killedBy" placeholder="Killed by">
-    </div>`;
-});
-
-imageUrlInput1.oninput = () => {
-  if (imageUrlInput1.value.trim()) {
-    imagePreview1.src = imageUrlInput1.value.trim();
-    imagePreview1.style.display = "block";
-  } else {
-    imagePreview1.style.display = "none";
-  }
-};
-
-imageUrlInput2.oninput = () => {
-  if (imageUrlInput2.value.trim()) {
-    imagePreview2.src = imageUrlInput2.value.trim();
-    imagePreview2.style.display = "block";
-  } else {
-    imagePreview2.style.display = "none";
-  }
-};
-
-imagePreview1.onclick = imagePreview2.onclick = (e) => {
-  modalImg.src = e.target.src;
-  imageModal.style.display = "flex";
-};
-
-saveBtn.onclick = async () => {
-  if (!currentUser) {
-    alert("Debes iniciar sesión para guardar runs.");
-    return;
-  }
-
-  const players = document.querySelectorAll(".player");
-  const deadChecks = document.querySelectorAll(".deadCheck");
-  const killedByInputs = document.querySelectorAll(".killedBy");
-
-  const party = [];
-  players.forEach((input, i) => {
-    const name = input.value.trim();
-    if (name) {
-      party.push({
-        name,
-        dead: deadChecks[i].checked,
-        killedBy: killedByInputs[i].value.trim() || null,
-        role: roles[i][0]
-      });
-    }
-  });
-
-  if (party.length === 0) return alert("Ingresa al menos un jugador");
-
-  const data = {
-    timestamp: Date.now(),
-    silver: silverInput.value.trim() || "4.5m",
-    imageUrl1: imageUrlInput1.value.trim() || null,
-    imageUrl2: imageUrlInput2.value.trim() || null,
-    fileUrl: fileUrlInput.value.trim() || null,
-    party
-  };
-
-  try {
-    if (editingRunId) {
-      await update(ref(db, `runs/${editingRunId}`), data);
-      alert("Run actualizada!");
-      editingRunId = null;
-      saveBtn.textContent = "Guardar Run";
-    } else {
-      await push(ref(db, "runs"), data);
-      alert("Run guardada!");
-    }
-    resetForm();
-  } catch (err) {
-    console.error("Error:", err);
-    alert("Error al guardar: " + err.message);
-  }
-};
-
-function resetForm() {
-  document.querySelectorAll(".player").forEach(i => i.value = "");
-  document.querySelectorAll(".deadCheck").forEach(c => c.checked = false);
-  document.querySelectorAll(".killedBy").forEach(k => k.value = "");
-  silverInput.value = "4.5m";
-  imageUrlInput1.value = "";
-  imageUrlInput2.value = "";
-  fileUrlInput.value = "";
-  imagePreview1.style.display = "none";
-  imagePreview2.style.display = "none";
-}
-
-const runsRef = ref(db, "runs");
-onValue(runsRef, (snapshot) => {
-  runsDiv.innerHTML = "";
-  if (!snapshot.val()) {
-    runsDiv.innerHTML = '<p style="text-align:center;color:#aaa;">Aún no hay runs guardadas</p>';
-    mostDeathsEl.textContent = "-";
-    mostPlayedEl.textContent = "-";
-    mainTankEl.textContent = "-";
-    totalSilverEl.textContent = "-";
-    return;
-  }
-
-  let deaths = {}, plays = {}, tank = {}, totalSilver = 0;
-
-  snapshot.forEach(child => {
-    const run = child.val();
-    const key = child.key;
-    if (!run || !run.party) return;
-
-    let silverStr = run.silver || "0";
-    let silverNum = 0;
-    if (silverStr.toLowerCase().endsWith("m")) silverNum = parseFloat(silverStr) * 1_000_000;
-    else if (silverStr.toLowerCase().endsWith("k")) silverNum = parseFloat(silverStr) * 1_000;
-    else silverNum = parseFloat(silverStr) || 0;
-    totalSilver += silverNum;
-
-    const partyArray = run.party;
-
-    const detailsHTML = partyArray.map(p => {
-      const imgSrc = roles.find(r => r[0] === p.role)?.[1] || '';
-      return `
-        <div class="${p.dead ? 'dead' : 'alive'}" style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-          <img src="${imgSrc}" alt="${p.role}" style="width:26px;height:26px;border-radius:4px">
-          <strong>${p.name}</strong> (${p.role})
-          ${p.dead && p.killedBy ? `<span class="killedby">— killed by ${p.killedBy}</span>` : ''}
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-icon">⚔️</span>
+                    <span class="logo-text">HCEMetterDPS</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#features" class="nav-link">Características</a>
+                    <a href="#how-it-works" class="nav-link">Cómo Funciona</a>
+                    <a href="#download" class="nav-link nav-link-cta">Descargar</a>
+                </div>
+            </div>
         </div>
-      `;
-    }).join("");
+    </nav>
 
-    let imagesHTML = "";
-    if (run.imageUrl1) {
-      imagesHTML += `<div><div class="image-title">Loot Completo / Principal</div><img src="${run.imageUrl1}" class="preview" onclick="openImage('${run.imageUrl1}')"></div>`;
-    }
-    if (run.imageUrl2) {
-      imagesHTML += `<div><div class="image-title">DPS Meter</div><img src="${run.imageUrl2}" class="preview" onclick="openImage('${run.imageUrl2}')"></div>`;
-    }
-    if (run.fileUrl) {
-      const fileName = decodeURIComponent(run.fileUrl.split('/').pop().split('?')[0]) || 'archivo_adjunto';
-      imagesHTML += `<div><div class="image-title">Registro Loot</div><a href="${run.fileUrl}" target="_blank" class="download-btn">⬇ Descargar ${fileName}</a></div>`;
-    }
-
-    runsDiv.innerHTML += `
-      <div class="run">
-        <div class="run-header">
-          <span>${new Date(run.timestamp).toLocaleString()} — <strong>Main Tank: ${partyArray[0]?.name || 'Desconocido'}</strong></span>
-          <span>${run.silver}</span>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="gradient-overlay"></div>
+            <img src="game-screenshot.jpg" alt="Albion Online Combat" class="hero-image" id="heroImage">
         </div>
-        <div style="margin-top:8px;display:flex;gap:6px;">
-          <button class="edit" onclick="protectedEdit('${key}')">Editar</button>
-          <button class="delete" onclick="protectedDelete('${key}')">Borrar</button>
-          <button onclick="toggleDetails(this)">Ver detalles</button>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Para Albion Online</span>
+                </div>
+                <h1 class="hero-title">
+                    Domina el Combate con
+                    <span class="gradient-text">HCEMetterDPS</span>
+                </h1>
+                <p class="hero-description">
+                    El medidor de DPS más avanzado para Albion Online. Rastrea el daño en tiempo real,
+                    analiza el rendimiento de tu party y mejora tu estrategia de combate.
+                </p>
+                <div class="hero-acknowledgment">
+                    <p class="acknowledgment-text">
+                        <span class="acknowledgment-icon">💜</span>
+                        Un agradecimiento especial a <strong>Triky313</strong>, el es el creador de
+                        <a href="https://github.com/Triky313/AlbionOnline-StatisticsAnalysis" target="_blank"
+                            rel="noopener noreferrer" class="acknowledgment-link">AlbionOnline - Statistics
+                            Analysis</a>,
+                        gracias a el este programa es posible.
+                    </p>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <span class="btn-icon">⬇️</span>
+                        Descargar Gratis
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        Ver Características
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Gratis</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">Real-Time</div>
+                        <div class="stat-label">Datos en Vivo</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">Ligero</div>
+                        <div class="stat-label">Sin Lag</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="run-details" style="display:none;">
-          ${imagesHTML}
-          <div style="margin-top:20px;">${detailsHTML}</div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Características Principales</h2>
+                <p class="section-description">Todo lo que necesitas para dominar el combate en Albion Online</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Estadísticas en Tiempo Real</h3>
+                    <p class="feature-description">
+                        Visualiza el DPS de cada miembro de tu party instantáneamente durante el combate.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Interfaz Intuitiva</h3>
+                    <p class="feature-description">
+                        Diseño limpio y fácil de usar que no interfiere con tu experiencia de juego.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Ultra Ligero</h3>
+                    <p class="feature-description">
+                        Optimizado para no afectar el rendimiento del juego, consume mínimos recursos.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">Copia Rápida</h3>
+                    <p class="feature-description">
+                        Copia las estadísticas al portapapeles con un solo clic para compartir con tu guild.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔝</div>
+                    <h3 class="feature-title">Siempre Visible</h3>
+                    <p class="feature-description">
+                        Modo "Always On Top" para mantener las estadísticas visibles sobre el juego.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3 class="feature-title">Personalizable</h3>
+                    <p class="feature-description">
+                        Ajusta la interfaz a tu gusto con opciones de personalización flexibles.
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>`;
+    </section>
 
-    partyArray.forEach(p => {
-      if (!p) return;
-      plays[p.name] = (plays[p.name] || 0) + 1;
-      if (p.dead) deaths[p.name] = (deaths[p.name] || 0) + 1;
-      if (p.role?.includes("Main Tank")) tank[p.name] = (tank[p.name] || 0) + 1;
-    });
-  });
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cómo Funciona</h2>
+                <p class="section-description">Comienza a usar HCEMetterDPS en 3 simples pasos</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Descarga e Instala</h3>
+                    <p class="step-description">
+                        Descarga el programa y extrae los archivos en tu carpeta preferida.
+                    </p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Ejecuta el Programa</h3>
+                    <p class="step-description">
+                        Abre HCEMetterDPS antes o durante tu sesión de Albion Online.
+                    </p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">¡Listo para Combatir!</h3>
+                    <p class="step-description">
+                        Las estadísticas de DPS aparecerán automáticamente durante el combate.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  const playsFiltered = {};
-  Object.entries(plays).forEach(([name, count]) => {
-    if (name !== "EasyGood") {
-      playsFiltered[name] = count;
-    }
-  });
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="download-card">
+                <div class="download-content">
+                    <h2 class="download-title">Descarga HCEMetterDPS</h2>
+                    <p class="download-description">
+                        Versión 1.0.0 - Compatible con Windows 10/11
+                    </p>
+                    <div class="download-features">
+                        <div class="download-feature">
+                            <span class="check-icon">✓</span>
+                            <span>100% Gratis y Open Source</span>
+                        </div>
+                        <div class="download-feature">
+                            <span class="check-icon">✓</span>
+                            <span>Sin anuncios ni malware</span>
+                        </div>
+                        <div class="download-feature">
+                            <span class="check-icon">✓</span>
+                            <span>Actualizaciones regulares</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-download" id="downloadBtn">
+                        <span class="btn-icon">⬇️</span>
+                        Descargar Ahora
+                        <span class="btn-subtext">Windows 10/11</span>
+                    </a>
+                    <p class="download-note">
+                        Al descargar, aceptas que este es un proyecto de código abierto sin garantías.
+                    </p>
+                </div>
+                <div class="download-visual">
+                    <div class="floating-card card-1">
+                        <div class="mini-stat">
+                            <span class="mini-label">DPS Total</span>
+                            <span class="mini-value">45,892</span>
+                        </div>
+                    </div>
+                    <div class="floating-card card-2">
+                        <div class="mini-stat">
+                            <span class="mini-label">Top Player</span>
+                            <span class="mini-value">EasyGood</span>
+                        </div>
+                    </div>
+                    <div class="floating-card card-3">
+                        <div class="mini-stat">
+                            <span class="mini-label">Status</span>
+                            <span class="mini-value">🟢 Activo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  const topDeaths = Object.entries(deaths).sort((a,b)=>b[1]-a[1])[0];
-  const topPlayed = Object.entries(playsFiltered).sort((a,b)=>b[1]-a[1])[0];
-  const topTank = Object.entries(tank).sort((a,b)=>b[1]-a[1])[0];
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">⚔️</span>
+                        <span class="logo-text">HCEMetterDPS</span>
+                    </div>
+                    <p class="footer-description">
+                        Medidor de DPS para Albion Online desarrollado por la comunidad.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Producto</h4>
+                        <a href="#features" class="footer-link">Características</a>
+                        <a href="#how-it-works" class="footer-link">Cómo Funciona</a>
+                        <a href="#download" class="footer-link">Descargar</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-heading">Soporte</h4>
+                        <a href="#" class="footer-link">Documentación</a>
+                        <a href="#" class="footer-link">Reportar Bug</a>
+                        <a href="#" class="footer-link">Contacto</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2026 HCEMetterDPS. Proyecto de código abierto para la comunidad de Albion Online.
+                </p>
+            </div>
+        </div>
+    </footer>
 
-  mostDeathsEl.textContent = topDeaths ? `${topDeaths[0]} (${topDeaths[1]})` : "-";
-  mostPlayedEl.textContent = topPlayed ? `${topPlayed[0]} (${topPlayed[1]})` : "-";
-  mainTankEl.textContent = topTank ? `${topTank[0]} (${topTank[1]})` : "-";
-  totalSilverEl.textContent = `${(totalSilver/1_000_000).toFixed(2)}m`;
-});
-
-window.protectedEdit = (id) => {
-  if (!currentUser) {
-    alert("Debes iniciar sesión para editar.");
-    return;
-  }
-  editRun(id);
-};
-
-window.protectedDelete = (id) => {
-  if (!currentUser) {
-    alert("Debes iniciar sesión para borrar.");
-    return;
-  }
-  deleteRun(id);
-};
-
-window.toggleDetails = (button) => {
-  const details = button.closest('.run').querySelector('.run-details');
-  details.style.display = details.style.display === 'block' ? 'none' : 'block';
-};
-
-window.editRun = (id) => {
-  onValue(ref(db, `runs/${id}`), snap => {
-    const run = snap.val();
-    if (!run || !run.party) return alert("Run inválida.");
-
-    editingRunId = id;
-    saveBtn.textContent = "Actualizar Run";
-    saveBtn.disabled = false;
-
-    const players = document.querySelectorAll(".player");
-    const deadChecks = document.querySelectorAll(".deadCheck");
-    const killedBy = document.querySelectorAll(".killedBy");
-
-    run.party.forEach((p, i) => {
-      if (players[i]) {
-        players[i].value = p.name || "";
-        deadChecks[i].checked = p.dead || false;
-        killedBy[i].value = p.killedBy || "";
-      }
-    });
-
-    silverInput.value = run.silver || "4.5m";
-    imageUrlInput1.value = run.imageUrl1 || "";
-    imageUrlInput2.value = run.imageUrl2 || "";
-    fileUrlInput.value = run.fileUrl || "";
-
-    if (run.imageUrl1) { imagePreview1.src = run.imageUrl1; imagePreview1.style.display = "block"; }
-    if (run.imageUrl2) { imagePreview2.src = run.imageUrl2; imagePreview2.style.display = "block"; }
-  }, { onlyOnce: true });
-};
-
-window.deleteRun = (id) => {
-  remove(ref(db, `runs/${id}`))
-    .then(() => alert("Run borrada"))
-    .catch(err => alert("Error: " + err.message));
-};
-
-window.openImage = (url) => {
-  modalImg.src = url;
-  imageModal.style.display = "flex";
-};
-</script>
+    <script src="script.js"></script>
 </body>
+
 </html>
