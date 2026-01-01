@@ -25,9 +25,30 @@
                     <span class="logo-text">HCEMetterDPS</span>
                 </div>
                 <div class="nav-links">
-                    <a href="#features" class="nav-link">Características</a>
-                    <a href="#how-it-works" class="nav-link">Cómo Funciona</a>
-                    <a href="#download" class="nav-link nav-link-cta">Descargar</a>
+                    <a href="#features" class="nav-link" data-i18n="nav-features">Características</a>
+                    <a href="#how-it-works" class="nav-link" data-i18n="nav-how-it-works">Cómo Funciona</a>
+                    <a href="#download" class="nav-link nav-link-cta" data-i18n="nav-download">Descargar</a>
+                </div>
+                <div class="language-selector">
+                    <button class="language-btn" id="languageBtn">
+                        <span class="language-icon">🌐</span>
+                        <span class="language-text" id="currentLang">ES</span>
+                        <span class="language-arrow">▼</span>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <button class="language-option" data-lang="es">
+                            <span class="flag">🇪🇸</span>
+                            <span>Español</span>
+                        </button>
+                        <button class="language-option" data-lang="en">
+                            <span class="flag">🇬🇧</span>
+                            <span>English</span>
+                        </button>
+                        <button class="language-option" data-lang="pt">
+                            <span class="flag">🇧🇷</span>
+                            <span>Português</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,49 +64,50 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="badge-dot"></span>
-                    <span>Para Albion Online</span>
+                    <span data-i18n="hero-badge">Para Albion Online</span>
                 </div>
                 <h1 class="hero-title">
-                    Domina el Combate con
+                    <span data-i18n="hero-title-1">Domina el Combate con</span>
                     <span class="gradient-text">HCEMetterDPS</span>
                 </h1>
-                <p class="hero-description">
+                <p class="hero-description" data-i18n="hero-description">
                     El medidor de DPS más avanzado para Albion Online. Rastrea el daño en tiempo real,
                     analiza el rendimiento de tu party y mejora tu estrategia de combate.
                 </p>
                 <div class="hero-acknowledgment">
                     <p class="acknowledgment-text">
                         <span class="acknowledgment-icon">💜</span>
-                        Un agradecimiento especial a <strong>Triky313</strong>, el es el creador de
-                        <a href="https://github.com/Triky313/AlbionOnline-StatisticsAnalysis" target="_blank"
-                            rel="noopener noreferrer" class="acknowledgment-link">AlbionOnline - Statistics
-                            Analysis</a>,
-                        gracias a el este programa es posible.
+                        <span data-i18n="hero-acknowledgment">Un agradecimiento especial a <strong>Triky313</strong>, el
+                            es el creador de
+                            <a href="https://github.com/Triky313/AlbionOnline-StatisticsAnalysis" target="_blank"
+                                rel="noopener noreferrer" class="acknowledgment-link">AlbionOnline - Statistics
+                                Analysis</a>,
+                            gracias a el este programa es posible.</span>
                     </p>
                 </div>
                 <div class="hero-buttons">
                     <a href="#download" class="btn btn-primary">
                         <span class="btn-icon">⬇️</span>
-                        Descargar Gratis
+                        <span data-i18n="hero-btn-download">Descargar Gratis</span>
                     </a>
                     <a href="#features" class="btn btn-secondary">
-                        Ver Características
+                        <span data-i18n="hero-btn-features">Ver Características</span>
                     </a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
                         <div class="stat-value">100%</div>
-                        <div class="stat-label">Gratis</div>
+                        <div class="stat-label" data-i18n="hero-stat-free">Gratis</div>
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat-item">
-                        <div class="stat-value">Real-Time</div>
-                        <div class="stat-label">Datos en Vivo</div>
+                        <div class="stat-value" data-i18n="hero-stat-realtime">Real-Time</div>
+                        <div class="stat-label" data-i18n="hero-stat-realtime-label">Datos en Vivo</div>
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat-item">
-                        <div class="stat-value">Ligero</div>
-                        <div class="stat-label">Sin Lag</div>
+                        <div class="stat-value" data-i18n="hero-stat-light">Ligero</div>
+                        <div class="stat-label" data-i18n="hero-stat-light-label">Sin Lag</div>
                     </div>
                 </div>
             </div>
@@ -287,6 +309,7 @@
         </div>
     </footer>
 
+    <script src="i18n.js"></script>
     <script src="script.js"></script>
 </body>
 
