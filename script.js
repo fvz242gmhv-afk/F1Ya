@@ -47,7 +47,7 @@ downloadBtn.addEventListener('click', (e) => {
 
     // Redirect to MediaFire download
     setTimeout(() => {
-        window.open('https://www.mediafire.com/file/tpvkqtp5h5n6vgs/HCEMetter.rar/file', '_blank');
+        window.open('https://www.mediafire.com/file/ks3sv50hh286gej/HCEMetter_v1.0.0.rar/file', '_blank');
     }, 500);
 });
 
