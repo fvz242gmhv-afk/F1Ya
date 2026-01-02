@@ -253,3 +253,4 @@ console.log('%c¡Gracias por visitar! Si encuentras algún bug, por favor repór
 console.log('%cDesarrollado con ❤️ para la comunidad de Albion Online', 'font-size: 12px; color: #a0a0b8;');
 
 
+
