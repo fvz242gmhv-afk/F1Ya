@@ -47,7 +47,7 @@ downloadBtn.addEventListener('click', (e) => {
 
     // Redirect to MediaFire download
     setTimeout(() => {
-        window.open('https://www.mediafire.com/file/fw2ufkkp7i850u7/HCEMetter_v1.0.0.rar/file', '_blank');
+        window.open('https://www.mediafire.com/file/ddfw0chgeo53qkb/HCEMetter_v1.0.0.rar/file', '_blank');
     }, 500);
 });
 
@@ -251,4 +251,5 @@ floatingCards.forEach(card => {
 console.log('%c⚔️ HCE DPS Metter', 'font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
 console.log('%c¡Gracias por visitar! Si encuentras algún bug, por favor repórtalo.', 'font-size: 14px; color: #667eea;');
 console.log('%cDesarrollado con ❤️ para la comunidad de Albion Online', 'font-size: 12px; color: #a0a0b8;');
+
 
