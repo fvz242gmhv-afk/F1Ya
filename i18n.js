@@ -12,7 +12,7 @@ const translations = {
         'hero-badge': 'Para Albion Online',
         'hero-title-1': 'Domina el Combate con',
         'hero-description': 'El medidor de DPS más avanzado para Albion Online. Rastrea el daño en tiempo real, analiza el rendimiento de tu party y mejora tu estrategia de combate.',
-        'hero-acknowledgment': 'Un agradecimiento especial a <strong>Triky313</strong>, el es el creador de <a href="https://github.com/Triky313/AlbionOnline-StatisticsAnalysis" target="_blank" rel="noopener noreferrer" class="acknowledgment-link">AlbionOnline - Statistics Analysis</a>, gracias a el este programa es posible.',
+        'hero-acknowledgment': 'Un agradecimiento especial a <strong>Triky313</strong>, gracias a el este programa es posible.',
         'hero-btn-download': 'Descargar Gratis',
         'hero-btn-discord': 'Comunidad Discord',
         'hero-btn-features': 'Ver Características',
@@ -40,18 +40,18 @@ const translations = {
 
         // How It Works Section
         'how-it-works-title': 'Cómo Funciona',
-        'how-it-works-description': 'Comienza a usar HCEMetterDPS en 3 simples pasos',
+        'how-it-works-description': 'Comienza a usar HCE DPS Metter en 3 simples pasos',
         'step-1-title': 'Descarga e Instala',
         'step-1-desc': 'Descarga el programa y extrae los archivos en tu carpeta preferida.',
         'step-2-title': 'Ejecuta el Programa',
-        'step-2-desc': 'Abre HCEMetterDPS antes o durante tu sesión de Albion Online.',
+        'step-2-desc': 'Abre HCE DPS Metter antes o durante tu sesión de Albion Online.',
         'step-3-title': '¡Listo para Combatir!',
         'step-3-desc': 'Las estadísticas de DPS aparecerán automáticamente durante el combate.',
         'video-title': '📺 Video Tutorial Completo',
         'video-description': 'Mira este video para ver el programa en acción y aprender a usarlo paso a paso.',
 
         // Download Section
-        'download-title': 'Descarga HCEMetterDPS',
+        'download-title': 'Descarga HCE DPS Metter',
         'download-description': 'Versión 1.0.0 - Compatible con Windows 10/11',
         'download-feature-1': '100% Gratis y Open Source',
         'download-feature-2': 'Sin anuncios ni malware',
@@ -67,7 +67,7 @@ const translations = {
         'footer-documentation': 'Documentación',
         'footer-report-bug': 'Reportar Bug',
         'footer-contact': 'Contacto',
-        'footer-copyright': '© 2026 HCEMetterDPS. Proyecto de código abierto para la comunidad de Albion Online.'
+        'footer-copyright': '© 2026 HCE DPS Metter. Proyecto de código abierto para la comunidad de Albion Online.'
     },
 
     en: {
@@ -80,7 +80,7 @@ const translations = {
         'hero-badge': 'For Albion Online',
         'hero-title-1': 'Master Combat with',
         'hero-description': 'The most advanced DPS meter for Albion Online. Track damage in real-time, analyze your party\'s performance and improve your combat strategy.',
-        'hero-acknowledgment': 'Special thanks to <strong>Triky313</strong>, he is the creator of <a href="https://github.com/Triky313/AlbionOnline-StatisticsAnalysis" target="_blank" rel="noopener noreferrer" class="acknowledgment-link">AlbionOnline - Statistics Analysis</a>, thanks to him this program is possible.',
+        'hero-acknowledgment': 'Special thanks to <strong>Triky313</strong>, thanks to him this program is possible.',
         'hero-btn-download': 'Download Free',
         'hero-btn-discord': 'Discord Community',
         'hero-btn-features': 'View Features',
@@ -108,18 +108,18 @@ const translations = {
 
         // How It Works Section
         'how-it-works-title': 'How It Works',
-        'how-it-works-description': 'Start using HCEMetterDPS in 3 simple steps',
+        'how-it-works-description': 'Start using HCE DPS Metter in 3 simple steps',
         'step-1-title': 'Download & Install',
         'step-1-desc': 'Download the program and extract the files to your preferred folder.',
         'step-2-title': 'Run the Program',
-        'step-2-desc': 'Open HCEMetterDPS before or during your Albion Online session.',
+        'step-2-desc': 'Open HCE DPS Metter before or during your Albion Online session.',
         'step-3-title': 'Ready to Fight!',
         'step-3-desc': 'DPS statistics will appear automatically during combat.',
         'video-title': '📺 Complete Video Tutorial',
         'video-description': 'Watch this video to see the program in action and learn how to use it step by step.',
 
         // Download Section
-        'download-title': 'Download HCEMetterDPS',
+        'download-title': 'Download HCE DPS Metter',
         'download-description': 'Version 1.0.0 - Compatible with Windows 10/11',
         'download-feature-1': '100% Free and Open Source',
         'download-feature-2': 'No ads or malware',
@@ -135,7 +135,7 @@ const translations = {
         'footer-documentation': 'Documentation',
         'footer-report-bug': 'Report Bug',
         'footer-contact': 'Contact',
-        'footer-copyright': '© 2026 HCEMetterDPS. Open source project for the Albion Online community.'
+        'footer-copyright': '© 2026 HCE DPS Metter. Open source project for the Albion Online community.'
     },
 
     pt: {
@@ -148,7 +148,7 @@ const translations = {
         'hero-badge': 'Para Albion Online',
         'hero-title-1': 'Domine o Combate com',
         'hero-description': 'O medidor de DPS mais avançado para Albion Online. Rastreie o dano em tempo real, analise o desempenho do seu grupo e melhore sua estratégia de combate.',
-        'hero-acknowledgment': 'Um agradecimento especial a <strong>Triky313</strong>, ele é o criador de <a href="https://github.com/Triky313/AlbionOnline-StatisticsAnalysis" target="_blank" rel="noopener noreferrer" class="acknowledgment-link">AlbionOnline - Statistics Analysis</a>, graças a ele este programa é possível.',
+        'hero-acknowledgment': 'Um agradecimento especial a <strong>Triky313</strong>, graças a ele este programa é possível.',
         'hero-btn-download': 'Baixar Grátis',
         'hero-btn-discord': 'Comunidade Discord',
         'hero-btn-features': 'Ver Características',
@@ -176,18 +176,18 @@ const translations = {
 
         // How It Works Section
         'how-it-works-title': 'Como Funciona',
-        'how-it-works-description': 'Comece a usar HCEMetterDPS em 3 passos simples',
+        'how-it-works-description': 'Comece a usar HCE DPS Metter em 3 passos simples',
         'step-1-title': 'Baixe e Instale',
         'step-1-desc': 'Baixe o programa e extraia os arquivos para sua pasta preferida.',
         'step-2-title': 'Execute o Programa',
-        'step-2-desc': 'Abra HCEMetterDPS antes ou durante sua sessão de Albion Online.',
+        'step-2-desc': 'Abra HCE DPS Metter antes ou durante sua sessão de Albion Online.',
         'step-3-title': 'Pronto para Lutar!',
         'step-3-desc': 'As estatísticas de DPS aparecerão automaticamente durante o combate.',
         'video-title': '📺 Tutorial em Vídeo Completo',
         'video-description': 'Assista a este vídeo para ver o programa em ação e aprender a usá-lo passo a passo.',
 
         // Download Section
-        'download-title': 'Baixar HCEMetterDPS',
+        'download-title': 'Baixar HCE DPS Metter',
         'download-description': 'Versão 1.0.0 - Compatível com Windows 10/11',
         'download-feature-1': '100% Grátis e Open Source',
         'download-feature-2': 'Sem anúncios ou malware',
@@ -203,7 +203,7 @@ const translations = {
         'footer-documentation': 'Documentação',
         'footer-report-bug': 'Reportar Bug',
         'footer-contact': 'Contato',
-        'footer-copyright': '© 2026 HCEMetterDPS. Projeto de código aberto para a comunidade de Albion Online.'
+        'footer-copyright': '© 2026 HCE DPS Metter. Projeto de código aberto para a comunidade de Albion Online.'
     }
 };
 

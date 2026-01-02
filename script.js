@@ -248,6 +248,6 @@ floatingCards.forEach(card => {
 });
 
 // Console easter egg
-console.log('%c⚔️ HCEMetterDPS', 'font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
+console.log('%c⚔️ HCE DPS Metter', 'font-size: 24px; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
 console.log('%c¡Gracias por visitar! Si encuentras algún bug, por favor repórtalo.', 'font-size: 14px; color: #667eea;');
 console.log('%cDesarrollado con ❤️ para la comunidad de Albion Online', 'font-size: 12px; color: #a0a0b8;');
