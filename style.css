@@ -1,0 +1,505 @@
+/* ====== BASE STYLES ====== */
+:root {
+    --bg-dark: #0a0b1e;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0b0;
+    --accent: #ff4d4d;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(20, 20, 40, 0.6);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-dark);
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    /* Evitar scroll horizontal */
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* ====== SCROLLBAR CUSTOMIZATION ====== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0b1e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ====== PUBLIC MAP UI ====== */
+#map {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.hud-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 300px;
+    z-index: 1000;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+    background: linear-gradient(90deg, #fff, #aaa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 20px 0;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* RIGHT PANELS (Ranking + Demographics) */
+.right-panel-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 240px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.ranking-panel,
+.demographics-panel {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.ranking-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+}
+
+.ranking-item:last-child {
+    border-bottom: none;
+}
+
+.rank-number {
+    font-weight: bold;
+    color: var(--accent);
+    background: rgba(255, 77, 77, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+
+.rank-name {
+    flex-grow: 1;
+    margin-left: 10px;
+    color: #ddd;
+}
+
+.demo-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.demo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
+.demo-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.demo-value {
+    font-weight: bold;
+    color: #fff;
+}
+
+.legend {
+    margin-top: 10px;
+}
+
+.gradient-bar {
+    height: 8px;
+    background: linear-gradient(90deg, #3b82f6, #f97316, #ef4444);
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.legend-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.custom-tooltip {
+    position: absolute;
+    background: rgba(10, 11, 30, 0.9);
+    border: 1px solid var(--glass-border);
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #fff;
+    pointer-events: none;
+    z-index: 2000;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
+.dept-label {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-shadow: 0 0 3px #000;
+    text-align: center;
+    pointer-events: none;
+}
+
+/* ====== ADMIN PANEL STYLES ====== */
+.admin-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    height: calc(100vh - 80px);
+    /* Full height minus margins */
+}
+
+.controls-section {
+    flex: 2;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+.news-section {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.dept-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s;
+}
+
+.dept-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dept-name {
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: block;
+    color: #eee;
+}
+
+.input-group {
+    display: flex;
+    gap: 5px;
+}
+
+/* Inputs & Buttons */
+input[type="number"] {
+    background: #1a1b2e;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 5px;
+    border-radius: 6px;
+    width: 60px;
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.input-group button {
+    background: #333;
+    color: #fff;
+    width: 30px;
+    font-weight: bold;
+}
+
+.input-group button:hover {
+    background: #555;
+}
+
+.save-btn {
+    background: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.save-btn:hover {
+    background: #ff3333;
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.4);
+}
+
+.confirm-btn {
+    background: #3b82f6;
+    color: white;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+}
+
+.confirm-btn:hover {
+    background: #2563eb;
+}
+
+/* News Feed Items */
+.news-item {
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid #555;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 0 8px 8px 0;
+}
+
+.news-source {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.news-date {
+    font-size: 0.75rem;
+    color: #777;
+}
+
+.news-title {
+    margin-top: 5px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.news-title a:hover {
+    text-decoration: underline;
+}
+
+.suggested-action {
+    margin-top: 10px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* ====== MOBILE RESPONSIVE ====== */
+@media (max-width: 768px) {
+
+    /* HUD moves to top-left with minimal padding */
+    .hud-container {
+        width: auto;
+        left: 10px;
+        right: 10px;
+        top: 10px;
+        padding: 0;
+        pointer-events: none;
+        /* Let clicks pass through container to map */
+    }
+
+    .hud-container .glass-panel {
+        padding: 10px 15px;
+        pointer-events: auto;
+        /* Re-enable pointer events for the panel itself */
+    }
+
+    .hud-container h1 {
+        font-size: 1.1rem;
+    }
+
+    .hud-container .subtitle {
+        margin-bottom: 5px;
+        font-size: 0.75rem;
+    }
+
+    .hud-container .stats-row {
+        margin-bottom: 5px;
+    }
+
+    .hud-container .stat-value {
+        font-size: 1.2rem;
+    }
+
+    .hud-container .stat-label {
+        font-size: 0.6rem;
+    }
+
+    /* Legend Compact */
+    .legend {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 5px;
+    }
+
+    .gradient-bar {
+        width: 80px;
+        margin-bottom: 0;
+    }
+
+    .legend-labels {
+        display: none;
+    }
+
+    /* Right Panel moves to Bottom Drawer */
+    .right-panel-container {
+        width: auto;
+        left: 10px;
+        right: 10px;
+        top: auto;
+        bottom: 20px;
+        flex-direction: row;
+        /* Stack horizontally if possible */
+        gap: 10px;
+        max-height: 35vh;
+        pointer-events: none;
+    }
+
+    .ranking-panel,
+    .demographics-panel {
+        flex: 1;
+        font-size: 0.8rem;
+        padding: 10px;
+        pointer-events: auto;
+        background: rgba(10, 11, 30, 0.85);
+        /* Slightly more opaque for readability */
+    }
+
+    .ranking-panel h3,
+    .demographics-panel h3 {
+        font-size: 0.8rem;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+    }
+
+    /* Make Admin Panel Single Column */
+    .admin-container {
+        flex-direction: column;
+        height: auto;
+        margin: 20px auto;
+        padding-bottom: 40px;
+    }
+
+    .controls-section,
+    .news-section {
+        flex: none;
+        width: 100%;
+        max-height: none;
+        overflow: visible;
+        box-sizing: border-box;
+        /* Ensure padding doesn't overflow width */
+    }
+}

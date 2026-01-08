@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Mapa Uruguay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #0d1117;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-container">
+        <!-- Columna Izquierda: Controles Manuales -->
+        <div class="controls-section">
+            <div class="admin-header">
+                <h1>Panel de Control</h1>
+                <button class="save-btn" onclick="saveAll()">Guardar Cambios</button>
+            </div>
+
+            <!-- Demografía -->
+            <div
+                style="margin-bottom: 2rem; border:1px solid rgba(255,255,255,0.1); padding:1rem; border-radius:8px; background:rgba(255,255,255,0.02);">
+                <h3 style="margin-top:0; font-size:1rem; color:#fff;">📊 Víctimas (Total País)</h3>
+                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px;">
+                    <div>
+                        <label style="display:block; font-size:0.8rem; color:#aaa; margin-bottom:5px;">Hombres</label>
+                        <input type="number" id="demo-men" value="0"
+                            style="width:100%; box-sizing:border-box; padding:8px; background:#161b22; border:1px solid #30363d; color:white; border-radius:4px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:0.8rem; color:#aaa; margin-bottom:5px;">Mujeres</label>
+                        <input type="number" id="demo-women" value="0"
+                            style="width:100%; box-sizing:border-box; padding:8px; background:#161b22; border:1px solid #30363d; color:white; border-radius:4px;">
+                    </div>
+                    <div>
+                        <label style="display:block; font-size:0.8rem; color:#aaa; margin-bottom:5px;">Menores</label>
+                        <input type="number" id="demo-minors" value="0"
+                            style="width:100%; box-sizing:border-box; padding:8px; background:#161b22; border:1px solid #30363d; color:white; border-radius:4px;">
+                    </div>
+                </div>
+            </div>
+
+            <p class="subtitle" style="margin-bottom: 2rem;">Edita la cantidad de casos por departamento. Los cambios se
+                reflejarán automáticamente en el mapa.</p>
+
+            <div id="departments-grid" class="admin-grid">
+                <!-- Items injected by JS -->
+            </div>
+        </div>
+
+        <!-- Columna Derecha: Feed de Noticias en Vivo -->
+        <div class="news-section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <h2 style="margin:0; font-size:1.2rem; color: #fff;">📡 Radar de Noticias</h2>
+                <button onclick="fetchNews()"
+                    style="background:transparent; border:1px solid var(--text-secondary); padding:0.2rem 0.5rem; font-size:0.8rem;">🔄
+                    Actualizar</button>
+            </div>
+            <p class="subtitle" style="margin-bottom:1rem;">Escaneando Subrayado, Montevideo Portal, Debate.uy...</p>
+
+            <div id="loading-feed" style="text-align: center; color: var(--text-secondary);">
+                Buscando noticias recientes...
+            </div>
+
+            <div id="news-feed" class="news-feed-container">
+                <!-- Noticias inyectadas aquí -->
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
