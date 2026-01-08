@@ -17,8 +17,9 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
 }).addTo(map);
 
 // Data Management
-let crimeData = JSON.parse(localStorage.getItem('uruguayCrimeData')) || {};
-let demoData = JSON.parse(localStorage.getItem('uruguayDemoData')) || { men: 0, women: 0, minors: 0 };
+// Initially empty, populated by fetch or localStorage
+let crimeData = {};
+let demoData = { men: 0, women: 0, minors: 0 };
 let geoJsonLayer;
 
 // Function to get color based on value
@@ -51,10 +52,7 @@ function updateHUD() {
     let current = parseInt(totalEl.innerText);
     if (isNaN(current)) current = 0;
 
-    if (current !== total) {
-        totalEl.innerText = total;
-        // Ideally add a count-up animation here
-    }
+    if (current !== total) totalEl.innerText = total;
 
     const now = new Date();
     document.getElementById('last-update').innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -63,18 +61,15 @@ function updateHUD() {
 // Interactivity
 function highlightFeature(e) {
     const layer = e.target;
-
     layer.setStyle({
         weight: 3,
         color: '#fff',
         dashArray: '',
         fillOpacity: 0.9
     });
-
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-
     showTooltip(e);
 }
 
@@ -92,7 +87,6 @@ function showTooltip(e) {
     tooltip.innerHTML = `<strong>${props.NAME_1}</strong><br/>Asesinatos: ${count}`;
     tooltip.style.display = 'block';
 
-    // Follow cursor
     const originalEvent = e.originalEvent;
     tooltip.style.left = originalEvent.pageX + 'px';
     tooltip.style.top = originalEvent.pageY + 'px';
@@ -103,7 +97,6 @@ function hideTooltip() {
     tooltip.style.display = 'none';
 }
 
-// Mouse move listener for tooltip following
 map.on('mousemove', function (e) {
     const tooltip = document.getElementById('tooltip');
     if (tooltip.style.display === 'block') {
@@ -116,10 +109,7 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        // click: zoomToFeature
     });
-
-    // Agregar etiqueta permanente
     if (feature.properties && feature.properties.NAME_1) {
         layer.bindTooltip(feature.properties.NAME_1, {
             permanent: true,
@@ -129,14 +119,10 @@ function onEachFeature(feature, layer) {
     }
 }
 
-// Fetch TopoJSON
-// Using the raw URL from the alotropico repo we found: https://raw.githubusercontent.com/alotropico/uruguay.geo/master/uruguay.json
-// Update Ranking Panel
 function updateRanking() {
     const list = document.getElementById('ranking-list');
     if (!list) return;
 
-    // Convert to array, filter > 0, sort desc
     const sorted = Object.entries(crimeData)
         .filter(([, count]) => count > 0)
         .sort((a, b) => b[1] - a[1]);
@@ -162,7 +148,6 @@ function updateRanking() {
     });
 }
 
-// Update Demographics Panel
 function updateDemographics() {
     const menEl = document.getElementById('count-men');
     const womenEl = document.getElementById('count-women');
@@ -173,60 +158,71 @@ function updateDemographics() {
     if (minorsEl) minorsEl.innerText = demoData.minors || 0;
 }
 
-// Fetch TopoJSON
-const DATA_URL = 'https://raw.githubusercontent.com/alotropico/uruguay.geo/master/uruguay.json';
+// Fetch Data & Map
+const MAP_URL = 'https://raw.githubusercontent.com/alotropico/uruguay.geo/master/uruguay.json';
+// Add timestamp to prevent caching old data.json
+const DATA_JSON_URL = 'data.json' + '?t=' + new Date().getTime();
 
-fetch(DATA_URL)
-    .then(response => response.json())
-    .then(topology => {
-        const geojson = topojson.feature(topology, topology.objects.uruguay);
+Promise.all([
+    fetch(MAP_URL).then(r => r.json()),
+    fetch(DATA_JSON_URL).then(r => r.json().catch(() => null)) // Use catch to handle empty or invalid JSON
+]).then(([topology, remoteData]) => {
 
-        geoJsonLayer = L.geoJson(geojson, {
-            style: getStyle,
-            onEachFeature: onEachFeature
-        }).addTo(map);
+    // 1. Determine Data Source
+    // Priority: LocalStorage (Local Dev/Admin) > Remote JSON (Public Mobile/Github)
 
-        geojson.features.forEach(f => {
-            const name = f.properties.NAME_1;
-            if (crimeData[name] === undefined) {
-                crimeData[name] = 0;
-            }
-        });
-        localStorage.setItem('uruguayCrimeData', JSON.stringify(crimeData));
-        updateHUD();
-        updateRanking();
-        updateDemographics();
-    })
-    .catch(err => {
-        console.error("Error loading map data:", err);
-        document.getElementById('map').innerHTML = "<div style='color:white; padding:2rem; text-align:center'>Error cargando el mapa. Verifica tu conexión.</div>";
+    const localCrime = JSON.parse(localStorage.getItem('uruguayCrimeData'));
+    const localDemo = JSON.parse(localStorage.getItem('uruguayDemoData'));
+
+    // Validar si hay datos locales "reales" (más de 0 keys/datos)
+    const hasLocalData = localCrime && Object.keys(localCrime).length > 0;
+
+    if (hasLocalData) {
+        console.log("Modo: Datos Locales (Admin/Dev)");
+        crimeData = localCrime || {};
+        demoData = localDemo || { men: 0, women: 0, minors: 0 };
+    } else if (remoteData) {
+        console.log("Modo: Datos Remotos (Público/Github)");
+        crimeData = remoteData.crimes || {};
+        demoData = remoteData.demographics || { men: 0, women: 0, minors: 0 };
+    } else {
+        console.log("Modo: Inicial (Vacío)");
+        crimeData = {};
+        demoData = { men: 0, women: 0, minors: 0 };
+    }
+
+    // 2. Setup Map
+    const geojson = topojson.feature(topology, topology.objects.uruguay);
+    geoJsonLayer = L.geoJson(geojson, {
+        style: getStyle,
+        onEachFeature: onEachFeature
+    }).addTo(map);
+
+    // Initial fill for missing keys
+    geojson.features.forEach(f => {
+        const name = f.properties.NAME_1;
+        if (crimeData[name] === undefined) crimeData[name] = 0;
     });
 
-// Listen for storage changes
+    // 3. Update UI
+    updateHUD();
+    updateRanking();
+    updateDemographics();
+})
+    .catch(err => {
+        console.warn("Critical Error loading data:", err);
+    });
+
+// Listener for localStorage changes (Only really useful when Admin is open in another tab on SAME PC)
 window.addEventListener('storage', (e) => {
     if (e.key === 'uruguayCrimeData') {
         crimeData = JSON.parse(e.newValue);
-        if (geoJsonLayer) {
-            geoJsonLayer.eachLayer((layer) => {
-                layer.setStyle(getStyle(layer.feature));
-            });
-        }
+        if (geoJsonLayer) geoJsonLayer.eachLayer(l => l.setStyle(getStyle(l.feature)));
         updateHUD();
         updateRanking();
     }
     if (e.key === 'uruguayDemoData') {
         demoData = JSON.parse(e.newValue);
         updateDemographics();
-    }
-});
-
-// Listen for storage changes (Sync with Admin Panel)
-window.addEventListener('storage', (e) => {
-    if (e.key === 'uruguayCrimeData') {
-        crimeData = JSON.parse(e.newValue);
-        if (geoJsonLayer) {
-            geoJsonLayer.setStyle(getStyle);
-        }
-        updateHUD();
     }
 });

@@ -1,21 +1,29 @@
 {
-    "Artigas": 0,
-    "Canelones": 17,
-    "Cerro Largo": 0,
-    "Colonia": 0,
-    "Durazno": 8,
-    "Flores": 0,
-    "Florida": 0,
-    "Lavalleja": 0,
-    "Maldonado": 8,
-    "Montevideo": 100,
-    "Paysandú": 0,
-    "Río Negro": 0,
-    "Rivera": 7,
-    "Rocha": 0,
-    "Salto": 3,
-    "San José": 0,
-    "Soriano": 3,
-    "Tacuarembó": 0,
-    "Treinta y Tres": 0
+    "crimes": {
+        "Artigas": 0,
+        "Canelones": 0,
+        "Cerro Largo": 0,
+        "Colonia": 0,
+        "Durazno": 0,
+        "Flores": 0,
+        "Florida": 0,
+        "Lavalleja": 0,
+        "Maldonado": 0,
+        "Montevideo": 5,
+        "Paysandú": 0,
+        "Río Negro": 0,
+        "Rivera": 0,
+        "Rocha": 0,
+        "Salto": 0,
+        "San José": 0,
+        "Soriano": 0,
+        "Tacuarembó": 0,
+        "Treinta y Tres": 0
+    },
+    "demographics": {
+        "men": 0,
+        "women": 0,
+        "minors": 0
+    },
+    "lastUpdate": "2026-01-08T16:02:32.993Z"
 }
