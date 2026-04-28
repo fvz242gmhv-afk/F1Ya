@@ -640,7 +640,7 @@
       badge.classList.add('busy');
       badge.textContent = '↻ Cargando...';
       try {
-        const res = await fetch('/api/stats');
+        const res = await fetch('stats.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const d = await res.json();
         document.getElementById('total-events').textContent = d.totalEvents ?? 0;
